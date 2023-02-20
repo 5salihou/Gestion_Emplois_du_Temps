@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\departement;
 use App\Models\filiere;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,7 +13,15 @@ class FiliereController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function departement()
+    {
+        return $this->belongsTo(departement::class)->constrained();
+    }
+    public function classe()
+    {
+        return $this->hasMany(classe::class)->constrained();
+    }
+    public function index()
     {
         //
     }
@@ -20,7 +29,7 @@ class FiliereController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -28,7 +37,7 @@ class FiliereController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -36,7 +45,7 @@ class FiliereController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(filiere $filiere): Response
+    public function show(filiere $filiere)
     {
         //
     }
@@ -44,7 +53,7 @@ class FiliereController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(filiere $filiere): Response
+    public function edit(filiere $filiere)
     {
         //
     }
@@ -52,7 +61,7 @@ class FiliereController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, filiere $filiere): RedirectResponse
+    public function update(Request $request, filiere $filiere)
     {
         //
     }
@@ -60,7 +69,7 @@ class FiliereController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(filiere $filiere): RedirectResponse
+    public function destroy(filiere $filiere)
     {
         //
     }

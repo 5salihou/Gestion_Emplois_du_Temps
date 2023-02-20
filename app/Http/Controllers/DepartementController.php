@@ -2,17 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\classe;
+use App\Models\filiere;
 use App\Models\departement;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DepartementController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    protected $guarded = ['id'];
+
+    public function filiere()
+    {
+        return $this->HasMany(filiere::class);
+    }
+    public function classe()
+    {
+        return $this->hasManyThrough(classe::class, filiere::class);
+    }
+    public function index()
     {
         //
     }
@@ -20,7 +32,7 @@ class DepartementController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -28,7 +40,7 @@ class DepartementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -36,7 +48,7 @@ class DepartementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(departement $departement): Response
+    public function show(departement $departement)
     {
         //
     }
@@ -44,7 +56,7 @@ class DepartementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(departement $departement): Response
+    public function edit(departement $departement)
     {
         //
     }
@@ -52,7 +64,7 @@ class DepartementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, departement $departement): RedirectResponse
+    public function update(Request $request, departement $departement)
     {
         //
     }
@@ -60,7 +72,7 @@ class DepartementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(departement $departement): RedirectResponse
+    public function destroy(departement $departement)
     {
         //
     }

@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\classe;
-use Illuminate\Http\RedirectResponse;
+use App\Models\filiere;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ClasseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function filiere(){
+        return $this->BelongsTo(filiere::class);
+    }
+    public function index()
     {
         //
     }
@@ -20,7 +25,7 @@ class ClasseController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -28,7 +33,7 @@ class ClasseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -36,7 +41,7 @@ class ClasseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(classe $classe): Response
+    public function show(classe $classe)
     {
         //
     }
@@ -44,7 +49,7 @@ class ClasseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(classe $classe): Response
+    public function edit(classe $classe)
     {
         //
     }
@@ -52,7 +57,7 @@ class ClasseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, classe $classe): RedirectResponse
+    public function update(Request $request, classe $classe)
     {
         //
     }
@@ -60,7 +65,7 @@ class ClasseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(classe $classe): RedirectResponse
+    public function destroy(classe $classe)
     {
         //
     }
