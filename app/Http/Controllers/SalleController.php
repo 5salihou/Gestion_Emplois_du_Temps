@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\notificationController;
+use App\Models\salle;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class NotificationControllerController extends Controller
+class SalleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class NotificationControllerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(notificationController $notificationController): Response
+    public function show(salle $salle): Response
     {
         //
     }
@@ -44,7 +44,7 @@ class NotificationControllerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(notificationController $notificationController): Response
+    public function edit(salle $salle): Response
     {
         //
     }
@@ -52,7 +52,7 @@ class NotificationControllerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, notificationController $notificationController): RedirectResponse
+    public function update(Request $request, salle $salle): RedirectResponse
     {
         //
     }
@@ -60,7 +60,7 @@ class NotificationControllerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(notificationController $notificationController): RedirectResponse
+    public function destroy(salle $salle): RedirectResponse
     {
         //
     }

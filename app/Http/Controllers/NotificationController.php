@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\matiereController;
+use App\Models\notification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class MatiereControllerController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class MatiereControllerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(matiereController $matiereController): Response
+    public function show(notification $notification): Response
     {
         //
     }
@@ -44,7 +44,7 @@ class MatiereControllerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(matiereController $matiereController): Response
+    public function edit(notification $notification): Response
     {
         //
     }
@@ -52,7 +52,7 @@ class MatiereControllerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, matiereController $matiereController): RedirectResponse
+    public function update(Request $request, notification $notification): RedirectResponse
     {
         //
     }
@@ -60,7 +60,7 @@ class MatiereControllerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(matiereController $matiereController): RedirectResponse
+    public function destroy(notification $notification): RedirectResponse
     {
         //
     }

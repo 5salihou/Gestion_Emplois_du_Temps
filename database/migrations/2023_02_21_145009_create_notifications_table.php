@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matiere_controllers', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->time('duree');
-            $table->string('sigle')->unique;
-            $table->string('domaine');
+            $table->string('titre');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matiere_controllers');
+        Schema::dropIfExists('notifications');
     }
 };

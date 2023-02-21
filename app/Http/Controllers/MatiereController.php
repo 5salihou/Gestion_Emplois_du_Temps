@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\salleController;
+use App\Models\matiere;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class SalleControllerController extends Controller
+class MatiereController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class SalleControllerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(salleController $salleController): Response
+    public function show(matiere $matiere): Response
     {
         //
     }
@@ -44,7 +44,7 @@ class SalleControllerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(salleController $salleController): Response
+    public function edit(matiere $matiere): Response
     {
         //
     }
@@ -52,7 +52,7 @@ class SalleControllerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, salleController $salleController): RedirectResponse
+    public function update(Request $request, matiere $matiere): RedirectResponse
     {
         //
     }
@@ -60,7 +60,7 @@ class SalleControllerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(salleController $salleController): RedirectResponse
+    public function destroy(matiere $matiere): RedirectResponse
     {
         //
     }
