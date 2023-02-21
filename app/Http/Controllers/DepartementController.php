@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\classe;
-use App\Models\filiere;
 use App\Models\departement;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DepartementController extends Controller
 {
@@ -16,14 +13,7 @@ class DepartementController extends Controller
      */
     protected $guarded = ['id'];
 
-    public function filiere()
-    {
-        return $this->HasMany(filiere::class);
-    }
-    public function classe()
-    {
-        return $this->hasManyThrough(classe::class, filiere::class);
-    }
+
     public function index()
     {
         //

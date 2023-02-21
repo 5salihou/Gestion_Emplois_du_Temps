@@ -2,25 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\departement;
 use App\Models\filiere;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class FiliereController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function departement()
-    {
-        return $this->belongsTo(departement::class)->constrained();
-    }
-    public function classe()
-    {
-        return $this->hasMany(classe::class)->constrained();
-    }
+
     public function index()
     {
         //

@@ -3,20 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\classe;
-use App\Models\filiere;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ClasseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function filiere(){
-        return $this->BelongsTo(filiere::class);
-    }
+
     public function index()
     {
         //
