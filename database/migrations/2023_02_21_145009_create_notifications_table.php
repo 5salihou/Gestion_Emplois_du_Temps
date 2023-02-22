@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\emplois_du_temps;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->string('description');
-            $table->foreignIdFor(emplois_du_temps::class)->constrained();
+            $table->foreignIdFor(user::class)->constrained();
             $table->timestamps();
         });
     }

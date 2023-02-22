@@ -20,4 +20,14 @@ class emplois_du_temps extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get all of the creneau for the emplois_du_temps
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function creneau(): HasMany
+    {
+        return $this->hasMany(creneau::class, 'foreign_key', 'local_key');
+    }
 }

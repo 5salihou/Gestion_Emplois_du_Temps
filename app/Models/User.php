@@ -64,4 +64,13 @@ class User extends Authenticatable
         return $this->hasMany(notification::class);
     }
 
+    /**
+     * Get all of the creneau for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function creneau(): HasMany
+    {
+        return $this->hasMany(creneau::class);
+    }
 }
