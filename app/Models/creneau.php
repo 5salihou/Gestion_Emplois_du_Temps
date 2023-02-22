@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class creneau extends Model
 {
     use HasFactory;
+
+    
 }
