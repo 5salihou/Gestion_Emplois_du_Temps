@@ -1,4 +1,4 @@
-// import _ from 'lodash';
+import _ from 'lodash';
 window._ = _;
 
 import 'bootstrap';
