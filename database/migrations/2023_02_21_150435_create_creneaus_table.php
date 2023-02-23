@@ -2,9 +2,11 @@
 
 use App\Models\User;
 use App\Models\classe;
-use App\Models\matiere;
 use App\Models\emplois_du_temps;
+use App\Models\matiere;
 use App\Models\type_intervention;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

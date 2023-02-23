@@ -19,4 +19,3 @@ class type_intervention extends Model
     {
         return $this->hasMany(creneau::class);
     }
-}

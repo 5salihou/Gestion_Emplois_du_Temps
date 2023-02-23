@@ -32,4 +32,5 @@ class filiere extends Model
    {
        return $this->hasMany(classe::class);
    }
+
 }
