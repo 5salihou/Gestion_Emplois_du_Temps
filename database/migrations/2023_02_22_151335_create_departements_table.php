@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\filiere;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,7 +16,6 @@ return new class extends Migration
             $table->string('nom');
             $table->dateTime('date');
             $table->timestamps();
-            $table->foreignIdFor(filiere::class)->constrained();
         });
     }
 

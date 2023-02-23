@@ -13,10 +13,24 @@ class filiere extends Model
 {
     use HasFactory;
 
-    public function departement(){
-        return $this->BelongsTo(departement::class);
-    }
-    public function classe(){
-        return $this->HasMany(classe::class);
-    }
+   /**
+    * Get the departement that owns the filiere
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+   public function departement(): BelongsTo
+   {
+       return $this->belongsTo(departement::class);
+   }
+
+   /**
+    * Get all of the classe for the filiere
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+   public function classe(): HasMany
+   {
+       return $this->hasMany(classe::class);
+   }
+
 }
