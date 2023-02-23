@@ -3,18 +3,37 @@
 namespace App\Models;
 
 use App\Models\filiere;
-use App\Models\departement;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class classe extends Model
 {
     use HasFactory;
-    public function filere(){
-        return $this->BelongsTo(filiere::class);
+
+    public function filere():BelongsTo
+    {
+        return $this->belongsTo(filiere::class);
     }
-    public function departement(){
-        return $this->BelongsTo(departement::class);
+
+    /**
+     * Get all of the creneau for the classe
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function creneau(): HasMany
+    {
+        return $this->hasMany(creneau::class);
+    }
+
+    /**
+     * Get the filiere that owns the classe
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function filiere(): BelongsTo
+    {
+        return $this->belongsTo(filiere::class);
     }
 }

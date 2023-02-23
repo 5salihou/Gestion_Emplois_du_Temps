@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\classe;
+use App\Models\departement;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('filieres', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->foreignIdFor(departement::class)->constrained();
             $table->timestamps();
-            $table->foreignIdFor(classe::class)->constrained();
         });
     }
 
