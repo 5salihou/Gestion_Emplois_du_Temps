@@ -28,6 +28,6 @@ class emplois_du_temps extends Model
      */
     public function creneau(): HasMany
     {
-        return $this->hasMany(creneau::class, 'foreign_key', 'local_key');
+        return $this->hasMany(creneau::class);
     }
 }

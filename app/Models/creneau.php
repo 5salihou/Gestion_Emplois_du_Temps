@@ -68,6 +68,6 @@ class creneau extends Model
      */
     public function type_intervention(): BelongsTo
     {
-        return $this->belongsTo(type_intervention::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(type_intervention::class);
     }
 }

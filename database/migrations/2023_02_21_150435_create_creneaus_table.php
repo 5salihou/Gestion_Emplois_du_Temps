@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\classe;
 use App\Models\emplois_du_temps;
 use App\Models\matiere;
@@ -7,6 +8,8 @@ use App\Models\type_intervention;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -25,7 +28,7 @@ return new class extends Migration
             $table->foreignIdFor(classe::class)->constrained();
             $table->foreignIdFor(emplois_du_temps::class)->constrained();
             $table->foreignIdFor(type_intervention::class)->constrained();
-            $table->foreignIdFor(user::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });
     }
