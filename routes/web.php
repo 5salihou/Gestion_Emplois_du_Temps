@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MatiereController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// routes des matieres
+Route::resource('matiere', MatiereController::class);
+// Route::get('/matiere/liste des matieres', [App\Http\Controllers\MatiereController::class, 'index'])->name('listMatiere');
+// Route::get('/matiere/creation de matiere', [App\Http\Controllers\MatiereController::class, 'store'])->name('createMatiere');
+
+
+// routes des notifications
+
+// routes des types d'interventions
+
+// routes des emplois du temps
