@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('titre')
+lister salle
+@endsection
 @section('content')
 <div class="row">
     <div class="col-12">

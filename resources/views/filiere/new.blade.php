@@ -1,4 +1,7 @@
-@extends('layouts.app');
+@extends('layouts.app')
+@section('titre')
+creer filiere
+@endsection
 @section('content')
 <div class="container">
     <div class="row g-2">

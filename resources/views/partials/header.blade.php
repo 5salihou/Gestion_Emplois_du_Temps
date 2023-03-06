@@ -17,7 +17,7 @@
                 </li>
             @endif
         @else
-            <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle text-secondary" href="#"><span>user connecte:  {{ auth()->user()->name }}</span> <i
+            <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle text-secondary" href="#">utilisateur connecte: <span class="text-primary"> " {{ auth()->user()->name }} "</span> <i
                         class="bi bi-chevron-down"></i></a>
                 <ul>
                     <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#">Profil</a>

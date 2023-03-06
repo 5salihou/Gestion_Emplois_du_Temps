@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('titre')
+editer classe
+@endsection
 @section('content')
 <div class="container">
     <div class="row g-2">
