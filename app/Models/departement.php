@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class departement extends Model
 {
+    protected $fillable=['id','nom'];
     use HasFactory;
 
     /**

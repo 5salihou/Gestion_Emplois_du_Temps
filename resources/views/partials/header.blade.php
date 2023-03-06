@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+<nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-6 static-top">
     <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
@@ -22,7 +22,7 @@
                 <ul>
                     <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#">Profil</a>
                     </li>
-                    <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle"
+                    <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle text-danger"
                             onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"
                             href="{{ route('logout') }}">Se déconnecter</a>

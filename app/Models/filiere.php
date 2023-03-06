@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class filiere extends Model
 {
+    protected $fillable=['id','nom','departement_id'];
     use HasFactory;
 
    /**

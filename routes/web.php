@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\FiliereController;
+use App\Http\Controllers\SalleController;
+use App\Models\departement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::resource('departement', DepartementController::class);
+Route::resource('filiere',FiliereController::class);
+Route::resource('classe', ClasseController::class);
+Route::resource('salle',SalleController::class);
 Route::get('/', function () {
     return view('welcome');
 });

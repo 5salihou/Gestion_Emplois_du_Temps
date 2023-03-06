@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class classe extends Model
 {
+    protected $fillable=['id','nom','filiere_id'];
     use HasFactory;
 
     public function filere():BelongsTo

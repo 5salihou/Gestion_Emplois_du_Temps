@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class salle extends Model
 {
+    protected $fillable=['id','nom','nombre'];
     use HasFactory;
 
     /**
