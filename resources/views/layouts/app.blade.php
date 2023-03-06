@@ -33,9 +33,8 @@
                         <ol class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle"
                                     href="{{ route('home') }}">Accueil</a></li>
-                            <li class="nav-item dropdown no-arrow">@yield('title')</li>
+                            <li class="nav-item dropdown no-arrow">@yield('titre')</li>
                         </ol>
-                        <h2>@yield('title')</h2>
 
                     </div>
                 </section>

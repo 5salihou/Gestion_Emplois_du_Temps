@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('titre')
+Welcome
+@endsection
 @section('content')
     <div class="modal" tabindex="-1">
         <div class="modal-dialog">
