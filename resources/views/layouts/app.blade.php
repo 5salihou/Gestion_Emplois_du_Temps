@@ -40,7 +40,9 @@
                 </section>
                 <hr>
                 <!-- Container Fluid-->
-                @yield('content')
+                <div class="container">
+                    @yield('content')
+                </div>
                 <!---Container Fluid-->
             </div>
             <!-- Footer -->

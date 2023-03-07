@@ -11,6 +11,8 @@ class emplois_du_temps extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     /**
      * Get the user that owns the emplois_du_temps
      *

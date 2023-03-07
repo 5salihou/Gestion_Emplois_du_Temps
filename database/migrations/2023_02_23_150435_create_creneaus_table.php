@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\emplois_du_temps;
 use App\Models\User;
 use App\Models\salle;
 use App\Models\classe;
+use App\Models\emplois_du_temps;
 use App\Models\matiere;
 use App\Models\type_intervention;
 use Illuminate\Support\Facades\Schema;

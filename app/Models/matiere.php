@@ -10,6 +10,8 @@ class matiere extends Model
 {
     use HasFactory;
 
+    protected $guarded=['id'];
+
     /**
      * Get all of the creneau for the matiere
      *
