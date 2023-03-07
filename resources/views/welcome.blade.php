@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('titre')
+
 @section('content')
-    <h1>Bienvenue sur la page welcome !</h1>
+    <h1>Bienvenue dans la plateforme Gestion_EDT !</h1>
 @endsection

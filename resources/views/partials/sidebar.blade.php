@@ -79,7 +79,7 @@
         </a>
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Example Pages</h6>
+                <h6 class="collapse-header">Pages de connexion</h6>
                 <a class="collapse-item" href="{{ route('login') }}">{{ __('Login') }}</a>
                 <a class="collapse-item" href="{{ route('register') }}">{{ __('Register') }}</a>
                 <a class="collapse-item" href="{{ route('matiere.index') }}">{{ __('Matiere') }}</a>
@@ -88,10 +88,16 @@
                 <a class="collapse-item" href="{{ route('emplois_du_temps.index') }}">{{ __('Emplois du temps') }}</a>
                 <a class="collapse-item" href="{{ route('creneau.index') }}">{{ __('Creneau') }}</a>
             </div>
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Page de GESTION</h6>
+                <a class="collapse-item" href="{{ route('departement.index') }}">DEPARTEMENT</a>
+                <a class="collapse-item" href="{{ route('filiere.index') }}">FILIERES</a>
+                <a class="collapse-item" href="{{ route('classe.index') }}">CLASSES</a>
+                <a class="collapse-item" href="{{ route('salle.index') }}">SALLES </a>
+            </div>
         </div>
     </li>
 
     <hr class="sidebar-divider">
-    <div class="version" id="version-ruangadmin"></div>
 
 </ul>

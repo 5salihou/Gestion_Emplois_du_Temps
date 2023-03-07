@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="img/logo/logo.png" rel="icon">
+    <link href="{{asset("img/logo/logo.png")}}" rel="icon">
     <title>GESTION-EDT - Dashboard</title>
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -33,9 +33,8 @@
                         <ol class="navbar-nav ml-auto">
                             <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle"
                                     href="{{ route('home') }}">Accueil</a></li>
-                            <li class="nav-item dropdown no-arrow">@yield('title')</li>
+                            <li class="nav-item dropdown no-arrow">@yield('titre')</li>
                         </ol>
-                        <h2>@yield('title')</h2>
 
                     </div>
                 </section>
