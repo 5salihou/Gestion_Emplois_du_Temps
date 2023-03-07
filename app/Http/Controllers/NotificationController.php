@@ -12,31 +12,44 @@ class NotificationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        return view('notification.createNotification');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
-        //
+        return view('notification.createNotification');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        //
+        // Validation
+        $request->validate([
+            'titre' => 'required',
+            'description' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        // initialisation
+        $notification = new notification($request->all());
+
+        // Enregistrement
+        $notification->saveOrFail();
+
+        return redirect()->route('notification.create');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(notification $notification): Response
+    public function show(notification $notification)
     {
         //
     }
@@ -44,7 +57,7 @@ class NotificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(notification $notification): Response
+    public function edit(notification $notification)
     {
         //
     }
@@ -52,7 +65,7 @@ class NotificationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, notification $notification): RedirectResponse
+    public function update(Request $request, notification $notification)
     {
         //
     }
@@ -60,7 +73,7 @@ class NotificationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(notification $notification): RedirectResponse
+    public function destroy(notification $notification)
     {
         //
     }
