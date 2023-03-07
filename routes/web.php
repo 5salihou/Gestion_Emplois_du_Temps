@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmploisDuTempsController;
+use App\Http\Controllers\MatiereController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\TypeInterventionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +25,20 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// routes des matieres
+Route::resource('matiere', MatiereController::class);
+//Route::get('/matiere/liste des matieres', [App\Http\Controllers\MatiereController::class, 'index'])->name('listMatiere');
+//Route::get('/matiere/creation de matiere', [App\Http\Controllers\MatiereController::class, 'store'])->name('createMatiere');
+
+// routes des notifications
+Route::resource('notification', NotificationController::class);
+
+// routes des types d'interventions
+Route::resource('type_intervention', TypeInterventionController::class);
+
+// routes des creneaux
+Route::resource('creneau', CreneauController::class);
+
+// routes des emplois du temps
+Route::resource('emplois_du_temps', EmploisDuTempsController::class);

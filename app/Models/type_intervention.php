@@ -10,6 +10,8 @@ class type_intervention extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     /**
      * Get all of the creneau for the type_intervention
      *
@@ -19,3 +21,5 @@ class type_intervention extends Model
     {
         return $this->hasMany(creneau::class);
     }
+
+}
