@@ -3,7 +3,6 @@
 use App\Models\User;
 use App\Models\salle;
 use App\Models\classe;
-use App\Models\emplois_du_temps;
 use App\Models\matiere;
 use App\Models\type_intervention;
 use Illuminate\Support\Facades\Schema;
@@ -19,13 +18,12 @@ return new class extends Migration
     {
         Schema::create('creneaus', function (Blueprint $table) {
             $table->id();
-            $table->string('heure_debut');
-            $table->string('heure_fin');
+            $table->time('heure_debut')->default('08:00:00');
+            $table->time('heure_fin')->default('12:00:00');
             $table->string('jour');
             $table->foreignIdFor(salle::class)->constrained();
             $table->foreignIdFor(matiere::class)->constrained();
             $table->foreignIdFor(classe::class)->constrained();
-            $table->foreignIdFor(emplois_du_temps::class)->constrained();
             $table->foreignIdFor(type_intervention::class)->constrained();
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();

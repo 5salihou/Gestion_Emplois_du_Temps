@@ -1,16 +1,18 @@
 <?php
 
-use App\Http\Controllers\EmploisDuTempsController;
-use App\Http\Controllers\MatiereController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\TypeInterventionController;
-use App\Http\Controllers\ClasseController;
-use App\Http\Controllers\DepartementController;
-use App\Http\Controllers\FiliereController;
-use App\Http\Controllers\SalleController;
 use App\Models\departement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SalleController;
+use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\CreneauController;
+use App\Http\Controllers\FiliereController;
+use App\Http\Controllers\MatiereController;
+use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\EmploisDuTempsController;
+use App\Http\Controllers\TypeInterventionController;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +47,10 @@ Route::resource('notification', NotificationController::class);
 // routes des types d'interventions
 Route::resource('type_intervention', TypeInterventionController::class);
 
-// routes des creneaux
+// routes des creneaus
 Route::resource('creneau', CreneauController::class);
 
 // routes des emplois du temps
 Route::resource('emplois_du_temps', EmploisDuTempsController::class);
+
+Route::resource('user',userController::class);
