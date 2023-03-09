@@ -51,7 +51,11 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{{ route('matiere.create') }}" class="btn btn-primary">Nouvelle matiere</a>
+            @if(Gate::allows('access-admin'))
+                @if (auth()->user()->role=="admin")
+                  <a href="{{ route('matiere.create') }}" class="btn btn-primary">Nouvelle matiere</a>
+                @endif
+            @endif
         </div>
     </div>
 @endsection
