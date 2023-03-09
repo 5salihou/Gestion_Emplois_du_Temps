@@ -31,27 +31,6 @@ editer utilisateur
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">email</label>
-                                    <input type="email" value="{{ old('email') ?? $user->email }}" class="form-control"
-                                        name="email" id="email" aria-describedby="helpNomId">
-                                    @error('email')
-                                        <small id="helpNomId" class="form-text text-muted">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">password</label>
-                                    <input type="password" value="{{ old('password') ?? $user->password }}" class="form-control"
-                                        name="password" id="password" aria-describedby="helpNomId"
-                                        placeholder="Nom de la tache">
-                                    @error('password')
-                                        <small id="helpNomId" class="form-text text-muted">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="mb-3">
                                     <label for="role" class="form-label">Role</label>
                                     <select class="form-control" name="role" id="role">
                                         <option selected></option>

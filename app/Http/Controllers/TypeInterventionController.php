@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\type_intervention;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\type_intervention;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
 
 class TypeInterventionController extends Controller
 {
@@ -23,6 +24,13 @@ class TypeInterventionController extends Controller
      */
     public function create()
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
+            abort(403,'vous ne pouvez rien modifier');
+        }
         return view('type_intervention.createTypeIntervention');
     }
 
@@ -59,6 +67,14 @@ class TypeInterventionController extends Controller
      */
     public function edit(type_intervention $type_intervention)
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
+            abort(403,'vous ne pouvez rien modifier');
+        }
         return view('type_intervention.editTypeIntervention', compact('type_intervention'));
     }
 
@@ -84,6 +100,14 @@ class TypeInterventionController extends Controller
      */
     public function destroy(type_intervention $type_intervention)
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
+            abort(403,'vous ne pouvez rien modifier');
+        }
         $type_intervention->delete();
         return redirect()->route('type_intervention.index');
     }

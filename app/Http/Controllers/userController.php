@@ -24,7 +24,7 @@ class userController extends Controller
      */
     public function create()
     {
-        return view('utilisateurs.new');
+        // return view('utilisateurs.new');
     }
 
     /**
@@ -32,19 +32,19 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:Users,name',
-            'email' => 'required',
-            'password' => 'required',
-            'role'=>'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|unique:Users,name',
+        //     'email' => 'required',
+        //     'password' => 'required',
+        //     'role'=>'required',
+        // ]);
 
-        // instanciation de user à partir du formulaire
-        $user = new User($request->all());
+        // // instanciation de user à partir du formulaire
+        // $user = new User($request->all());
 
-        // identifier l'id d'un user dans phpMyAdmin et l'associer à l'utilisateur
-        $user->saveOrFail();
-        return redirect()->route('user.index');
+        // // identifier l'id d'un user dans phpMyAdmin et l'associer à l'utilisateur
+        // $user->saveOrFail();
+        // return redirect()->route('user.index');
     }
 
     /**
@@ -60,10 +60,12 @@ class userController extends Controller
      */
     public function edit(User $user)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
             if(auth()->user()->role !="admin"){
                 abort(403,'vous ne pouvez rien modifier');
             }
+        }else{
+            abort(403,'vous ne pouvez rien modifier');
         }
         return view('utilisateurs.edit', compact('user'));
     }
@@ -74,9 +76,7 @@ class userController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required' ,
-            'email' => 'required',
-            'password' => 'required',
+            'name' => 'required',
         ]);
         $user->role=$request->role;
         $user->updateOrFail($request->all());
@@ -88,10 +88,12 @@ class userController extends Controller
      */
     public function destroy(User $user)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
             if(auth()->user()->role!="admin"){
                 abort(403,'vous ne pouvez rien modifier');
             }
+        }else{
+            abort(403,'vous ne pouvez rien modifier');
         }
         $user->deleteOrFail();
         return redirect()->route('utilisateur.index');

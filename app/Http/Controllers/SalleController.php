@@ -24,7 +24,12 @@ class SalleController extends Controller
      */
     public function create()
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
             abort(403,'vous ne pouvez rien modifier');
         }
         return view('salle.new');
@@ -57,7 +62,12 @@ class SalleController extends Controller
      */
     public function edit(salle $salle)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
             abort(403,'vous ne pouvez rien modifier');
         }
         return view('salle.edit', compact('salle'));
@@ -81,7 +91,11 @@ class SalleController extends Controller
      */
     public function destroy(salle $salle)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $salle->deleteOrFail();

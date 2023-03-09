@@ -54,7 +54,9 @@ lister departement
             </div>
 
             @if(Gate::allows('access-admin'))
-            <a href="{{ route('user.create') }}" class="btn btn-primary my-3">ajouter un utilisateur</a>
+                @if(auth()->user()->role=="admin")
+                  <a href="{{ route('user.create') }}" class="btn btn-primary my-3">ajouter un utilisateur</a>
+                @endif
             @endif
         </div>
         </div>

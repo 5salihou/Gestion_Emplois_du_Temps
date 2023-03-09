@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\emplois_du_temps;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\emplois_du_temps;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
 
 class EmploisDuTempsController extends Controller
 {
@@ -23,6 +24,13 @@ class EmploisDuTempsController extends Controller
      */
     public function create()
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
+            abort(403,'vous ne pouvez rien modifier');
+        }
         return view('emplois_du_temps.createEmploisDuTemps');
     }
 
@@ -58,6 +66,14 @@ class EmploisDuTempsController extends Controller
      */
     public function edit(emplois_du_temps $emplois_du_temps)
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
+            abort(403,'vous ne pouvez rien modifier');
+        }
         return view('emplois_du_temps.editEmploisDuTemps', compact('emplois_du_temps'));
     }
 
@@ -82,6 +98,14 @@ class EmploisDuTempsController extends Controller
      */
     public function destroy(emplois_du_temps $emplois_du_temps)
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
+            abort(403,'vous ne pouvez rien modifier');
+        }
         $emplois_du_temps->delete();
         return redirect()->route('emplois_du_temps.index');
     }

@@ -40,6 +40,14 @@ class CreneauController extends Controller
      */
     public function create()
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        else{
+            abort(403,'vous ne pouvez rien modifier');
+        }
         $matieres=matiere::all();
         $salles=salle::all();
         $type_interventions=type_intervention::all();
@@ -86,6 +94,14 @@ class CreneauController extends Controller
      */
     public function edit(creneau $creneau)
     {
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        else{
+            abort(403,'vous ne pouvez rien modifier');
+        }
         $matieres=matiere::all();
         $salles=salle::all();
         $type_interventions=type_intervention::all();
@@ -125,10 +141,13 @@ class CreneauController extends Controller
      */
     public function destroy(creneau $creneau)
     {
-       if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
             if(auth()->user()->role!="admin"){
                 abort(403,'vous ne pouvez rien modifier');
             }
+        }
+        else{
+            abort(403,'vous ne pouvez rien modifier');
         }
         $creneau->deleteOrFail();
         return redirect()->route('creneau.index');
