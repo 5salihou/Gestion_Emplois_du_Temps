@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('titre')
-lister filiere
+lister departement
 @endsection
 @section('content')
 <div class="row">
@@ -8,7 +8,7 @@ lister filiere
         <div class="card">
           <div class="card-body">
             <blockquote class="blockquote mb-0">
-              <p class="alert alert-primary">Liste des filieres</p>
+              <p class="alert alert-primary">Liste des utilisateurs</p>
             </blockquote>
             <div class="table-responsive-sm">
                 <table class="table table-bordered table-striped table-hover">
@@ -16,32 +16,30 @@ lister filiere
                         <tr>
                             <th scope="col">N°</th>
                             <th scope="col">Nom</th>
-                            <th scope="col">Departement d'appartenance</th>
-                            <th scope="col">date de creation</th>
+                            <th scope="col">email</th>
+                            <th scope="col">role</th>
+                            <th scope="col">Date de creation</th>
                             @if(Gate::allows('access-admin'))
-                                @if (auth()->user()->role=="admin")
-                                 <th scope="col">Actions</th>
+                                @if(auth()->user()->role=="admin")
+                                   <th scope="col">Actions</th>
                                 @endif
                             @endif
                         </tr>
-                    </thead>
+                    </thead>user
                     <tbody >
-                        @foreach ($filieres as $filiere)
+                        @foreach ($users as $user)
                         <tr class="">
                             <td scope="row">{{$loop->index+1}}</td>
-                            <td>{{ $filiere->nom }}</td>
-                            @foreach ($departements as $departement)
-                                @if($filiere->departement_id==$departement->id)
-
-                            <td>{{ $departement->nom }}</td>
-                                @endif
-                            @endforeach
-                            <td>{{ $filiere->created_at}}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role }}</td>
+                            <td>{{ $user->created_at}}</td>
                             @if(Gate::allows('access-admin'))
                                 @if (auth()->user()->role=="admin")
+
                                     <td>
-                                        <a href="{{route('filiere.edit',compact('filiere'))}}" class="btn btn-warning">Editer</a>
-                                        <form class="d-inline" action="{{ route('filiere.destroy', compact('filiere')) }}" method="post">
+                                        <a href="{{route('user.edit',compact('user'))}}" class="btn btn-warning">Editer</a>
+                                        <form class="d-inline" action="{{ route('user.destroy', compact('user')) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -56,7 +54,9 @@ lister filiere
             </div>
 
             @if(Gate::allows('access-admin'))
-            <a href="{{ route('filiere.create') }}" class="btn btn-primary my-3">Nouvelle filiere</a>
+                @if(auth()->user()->role=="admin")
+                  <a href="{{ route('user.create') }}" class="btn btn-primary my-3">ajouter un utilisateur</a>
+                @endif
             @endif
         </div>
         </div>
