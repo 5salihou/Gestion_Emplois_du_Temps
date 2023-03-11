@@ -15,7 +15,11 @@
                             <th scope="col">N*</th>
                             <th scope="col">Nom</th>
                             <th scope="col">DUREE</th>
-                            <th scope="col">Actions</th>
+                            @if(Gate::allows('access-admin'))
+                                @if (auth()->user()->role=="admin")
+                                   <th scope="col">Actions</th>
+                                 @endif
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -24,16 +28,21 @@
                                 <td scope="row">{{ $loop->index + 1 }}</td>
                                 <td>{{ $type_intervention->nom }}</td>
                                 <td>{{ $type_intervention->duree }}</td>
-                                <td>
-                                    <a href="{{ route('type_intervention.show', compact('type_intervention')) }}" class="btn btn-primary">Voir</a>
-                                    <a href="{{ route('type_intervention.edit', compact('type_intervention')) }}" class="btn btn-warning">Editer</a>
-                                    <form class="d-inline" action="{{ route('type_intervention.destroy', compact('type_intervention')) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                                    </form>
-                                </td>
+                                @if(Gate::allows('access-admin'))
+                                    @if (auth()->user()->role=="admin")
+                                        <td>
+                                            <a href="{{ route('type_intervention.show', compact('type_intervention')) }}" class="btn btn-primary">Voir</a>
+
+                                            <a href="{{ route('type_intervention.edit', compact('type_intervention')) }}" class="btn btn-warning">Editer</a>
+                                            <form class="d-inline" action="{{ route('type_intervention.destroy', compact('type_intervention')) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    @endif
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
