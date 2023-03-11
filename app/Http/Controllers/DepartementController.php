@@ -24,7 +24,11 @@ class DepartementController extends Controller
      */
     public function create()
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
             abort(403,'vous ne pouvez rien modifier');
         }
         return view('departement.new');
@@ -60,7 +64,11 @@ class DepartementController extends Controller
      */
     public function edit(departement $departement)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
             abort(403,'vous ne pouvez rien modifier');
         }
         return view('departement.edit', compact('departement'));
@@ -84,7 +92,11 @@ class DepartementController extends Controller
      */
     public function destroy(departement $departement)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $departement->deleteOrFail();

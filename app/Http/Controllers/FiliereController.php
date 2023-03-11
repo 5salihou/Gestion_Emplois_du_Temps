@@ -26,7 +26,11 @@ class FiliereController extends Controller
      */
     public function create()
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $departements=departement::all();
@@ -59,7 +63,12 @@ class FiliereController extends Controller
      */
     public function edit(filiere $filiere)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
             abort(403,'vous ne pouvez rien modifier');
         }
         $departements=departement::all();
@@ -84,7 +93,12 @@ class FiliereController extends Controller
      */
     public function destroy(filiere $filiere)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
             abort(403,'vous ne pouvez rien modifier');
         }
         $filiere->deleteOrFail();

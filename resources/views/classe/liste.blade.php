@@ -19,7 +19,9 @@ lister classe
                             <th scope="col">filiere d'appartenance</th>
                             <th scope="col">date de creation</th>
                             @if(Gate::allows('access-admin'))
-                            <th scope="col">Actions</th>
+                                @if (auth()->user()->role=="admin")
+                                   <th scope="col">Actions</th>
+                                @endif
                             @endif
                         </tr>
                     </thead>
@@ -36,14 +38,16 @@ lister classe
                             @endforeach
                             <td>{{ $classe->created_at}}</td>
                             @if(Gate::allows('access-admin'))
-                            <td>
-                                <a href="{{route('classe.edit',compact('classe'))}}" class="btn btn-warning">Editer</a>
-                                <form class="d-inline" action="{{ route('classe.destroy', compact('classe')) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                                </form>
-                            </td>
+                                @if (auth()->user()->role=="admin")
+                                    <td>
+                                        <a href="{{route('classe.edit',compact('classe'))}}" class="btn btn-warning">Editer</a>
+                                        <form class="d-inline" action="{{ route('classe.destroy', compact('classe')) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        </form>
+                                    </td>
+                                @endif
                             @endif
                         </tr>
                         @endforeach

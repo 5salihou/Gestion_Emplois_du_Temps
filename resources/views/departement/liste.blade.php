@@ -18,7 +18,9 @@ lister departement
                             <th scope="col">Nom</th>
                             <th scope="col">Date de creation</th>
                             @if(Gate::allows('access-admin'))
-                            <th scope="col">Actions</th>
+                                @if(auth()->user()->role=="admin")
+                                <th scope="col">Actions</th>
+                                @endif
                             @endif
                         </tr>
                     </thead>
@@ -29,14 +31,16 @@ lister departement
                             <td>{{ $departement->nom }}</td>
                             <td>{{ $departement->created_at}}</td>
                             @if(Gate::allows('access-admin'))
-                            <td>
-                                <a href="{{route('departement.edit',compact('departement'))}}" class="btn btn-warning">Editer</a>
-                                <form class="d-inline" action="{{ route('departement.destroy', compact('departement')) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                                </form>
-                            </td>
+                                @if(auth()->user()->role=="admin")
+                                    <td>
+                                        <a href="{{route('departement.edit',compact('departement'))}}" class="btn btn-warning">Editer</a>
+                                        <form class="d-inline" action="{{ route('departement.destroy', compact('departement')) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        </form>
+                                    </td>
+                                @endif
                             @endif
                         </tr>
                         @endforeach

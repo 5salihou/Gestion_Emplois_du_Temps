@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\notification;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
 
 class NotificationController extends Controller
 {
@@ -22,6 +23,13 @@ class NotificationController extends Controller
      */
     public function create()
     {
+        if(!Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
+            abort(403,'vous ne pouvez rien modifier');
+        }
         return view('notification.createNotification');
     }
 

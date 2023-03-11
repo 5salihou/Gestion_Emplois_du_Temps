@@ -24,7 +24,11 @@ class ClasseController extends Controller
      */
     public function create()
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $filieres=filiere::all();
@@ -57,7 +61,12 @@ class ClasseController extends Controller
      */
     public function edit(classe $classe)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        if(!Gate::allow('access-admin')){
             abort(403,'vous ne pouvez rien modifier');
         }
         $filieres=filiere::all();
@@ -82,7 +91,12 @@ class ClasseController extends Controller
      */
     public function destroy(classe $classe)
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $classe->deleteOrFail();
