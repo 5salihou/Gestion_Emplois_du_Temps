@@ -36,7 +36,7 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="duree" class="form-label">DUREE</label>
-                                        <input type="time" class="form-control" name="duree" id="duree"
+                                        <input type="number" class="form-control" name="duree" id="duree"
                                             aria-describedby="helpNomId" placeholder="duree de la matiere" required>
                                     </div>
                                 </div>

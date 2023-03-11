@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'liste des matieres')
+@section('titre', 'liste des matieres')
 
 @section('content')
-    <div card>
-        <div card-body>
+   <div class="row-12">
+    <div class="card">
+        <div class="card-body">
             <blockquote class="blockquote mb-0">
-                <p>listes des matieres</p>
+                <p class="alert alert-primary">listes des matieres</p>
             </blockquote>
             <div class="table-responsive-sm">
                 <table class="table table-bordered table-striped table-hover">
@@ -58,4 +59,5 @@
             @endif
         </div>
     </div>
+   </div>
 @endsection

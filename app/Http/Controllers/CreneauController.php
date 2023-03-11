@@ -53,12 +53,14 @@ class CreneauController extends Controller
         $type_interventions=type_intervention::all();
         $users=User::all();
         $classes=classe::all();
+        $creneaus=creneau::all();
         return view('creneau.new',[
             'users'=>$users,
             'classes'=>$classes,
             'matieres'=>$matieres,
             'salles'=>$salles,
             'type_interventions'=>$type_interventions,
+            'creneaus'=>$creneaus,
         ]);
     }
 
@@ -67,17 +69,64 @@ class CreneauController extends Controller
      */
     public function store(Request $request)
     {
-        $creneau=creneau::all();
-        $creneau->jour =$request->jour;
-        $creneau->heure_debut =$request->heure_debut;
-        $creneau->heure_fin =$request->heure_fin;
-        $creneau->salle_id=$request->salle_id;
-        $creneau->matiere_id=$request->matiere_id;
-        $creneau->classe_id=$request->classe_id;
-        $creneau->user_id=$request->user_id;
-        $creneau->type_intervention_id=$request->type_intervention_id;
-        $creneau=new creneau($request->all());
-        $creneau->saveOrFail();
+        $creneaus=creneau::all();
+        $a=1;
+        foreach($creneaus as $creneau)
+        {
+            if($creneau->jour == strval($request->jour))
+            {
+                if($creneau->heure_debut == $request->heure_debut){
+                    if( $creneau->salle_id == $request->salle_id){
+                        $a=0;
+                    break;
+                    }
+                    else if( $creneau->classe_id == $request->classe_id)
+                    {
+                        $a=0;
+                        break;
+                    }
+                    else if($creneau->user_id == $request->user_id){
+                        $a=0;
+                    break;
+                    }
+                    else{
+                        $a=1;
+                    }
+                    $a=1;
+                }
+            }else if($creneau->heure_debut >= $request->heure_fin){
+                $a=0;
+                break;
+            }
+            else{
+                $a=1;
+            }
+            if($request->heure_debut+$request->heure_fin >4){
+                $a=0;
+                break;
+            }
+            else{
+                $a=1;
+            }
+        }
+        if($a==1){
+        $creneaus->jour =$request->jour;
+        $creneaus->heure_debut =$request->heure_debut;
+        $creneaus->heure_fin =$request->heure_fin;
+        $creneaus->salle_id=$request->salle_id;
+        $creneaus->matiere_id=$request->matiere_id;
+        $creneaus->classe_id=$request->classe_id;
+        $creneaus->user_id=$request->user_id;
+        $creneaus->type_intervention_id=$request->type_intervention_id;
+        $creneaus=new creneau($request->all());
+        $creneaus->saveOrFail();
+        }
+        else
+        {
+            return back()->withErrors([
+                'alert' => "erreur de redondance ou l'heure debut est > = heure fin",
+            ]);
+        }
         return redirect()->route('creneau.index');
     }
 

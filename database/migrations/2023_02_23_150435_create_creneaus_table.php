@@ -18,8 +18,8 @@ return new class extends Migration
     {
         Schema::create('creneaus', function (Blueprint $table) {
             $table->id();
-            $table->time('heure_debut')->default('08:00:00');
-            $table->time('heure_fin')->default('12:00:00');
+            $table->integer('heure_debut');
+            $table->integer('heure_fin');
             $table->string('jour');
             $table->foreignIdFor(salle::class)->constrained();
             $table->foreignIdFor(matiere::class)->constrained();

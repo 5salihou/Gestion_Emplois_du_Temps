@@ -12,6 +12,7 @@ creer creneau
                     <form action="{{ route('creneau.store') }}" method="POST">
                         @csrf
                         <div class="row">
+                           
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="classe_id" class="form-label">Selection classe</label>
@@ -25,13 +26,23 @@ creer creneau
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="heure_debut" class="form-label">Heure Debut</label>
-                                    <input type="time" class="form-control" name="heure_debut" id="heure_debut">
+                                    <select class="form-control" name="heure_debut">
+                                        <option selected value="08">08:00</option>
+                                        <option selected value="09">09:00</option>
+                                        <option selected value="10">10:00</option>
+                                        <option selected value="15">15:00</option>
+                                   </select>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="mb-3">
-                                    <label for="heure_Fin" class="form-label">Heure Fin</label>
-                                    <input type="time" class="form-control" name="heure_Fin" id="heure_fin">
+                                    <label for="heure_fin" class="form-label">Heure Fin</label>
+                                    <select class="form-control" name="heure_fin">
+                                        <option selected value="10">10:00</option>
+                                        <option selected value="12">12:00</option>
+                                        <option selected value="16">16:00</option>
+                                        <option selected value="18">18:00</option>
+                                   </select>
                                 </div>
                             </div>
                             <div class="col-3">

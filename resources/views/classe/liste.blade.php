@@ -54,8 +54,11 @@ lister classe
                     </tbody>
                 </table>
             </div>
-            @if(Gate::allows('access-admin'))
-            <a href="{{ route('classe.create') }}" class="btn btn-primary my-3">Nouvelle classe</a>
+
+              @if(Gate::allows('access-admin'))
+                @if (auth()->user()->role=="admin")
+                <a href="{{ route('classe.create') }}" class="btn btn-primary my-3">Nouvelle classe</a>
+                @endif
             @endif
         </div>
         </div>

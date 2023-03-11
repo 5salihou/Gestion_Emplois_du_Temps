@@ -29,7 +29,7 @@ class SalleController extends Controller
                 abort(403,'vous ne pouvez rien modifier');
             }
         }
-        if(!Gate::allow('access-admin')){
+        else{
             abort(403,'vous ne pouvez rien modifier');
         }
         return view('salle.new');
