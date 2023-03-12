@@ -12,7 +12,6 @@ creer creneau
                     <form action="{{ route('creneau.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                           
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="classe_id" class="form-label">Selection classe</label>
@@ -49,12 +48,12 @@ creer creneau
                                 <div class="mb-3">
                                     <label for="jour" class="form-label">Selection jour</label>
                                     <select class="form-control" name="jour">
-                                         <option selected value="Lundi">Lundi</option>
-                                         <option selected value="Mardi">Mardi</option>
-                                         <option selected value="Mercredi">Mercredi</option>
-                                         <option selected value="Jeudi">Jeudi</option>
-                                         <option selected value="Vendredi">Vendredi</option>
-                                         <option selected value="Samedi">Samedi</option>
+                                         <option  value="Lundi">Lundi</option>
+                                         <option value="Mardi">Mardi</option>
+                                         <option  value="Mercredi">Mercredi</option>
+                                         <option value="Jeudi">Jeudi</option>
+                                         <option  value="Vendredi">Vendredi</option>
+                                         <option value="Samedi">Samedi</option>
                                     </select>
                                 </div>
                             </div>
@@ -63,8 +62,8 @@ creer creneau
                                     <label for="filiere_id" class="form-label">Selection professeur</label>
                                     <select class="form-control form-select" name="user_id">
                                         @foreach ($users as $user)
-                                            @if($user->role=='professeur')
-                                                <option selected value="{{$user->id}}">{{$user->name}}</option>
+                                            @if($user->role=='professeur'||$user->role=="admin")
+                                                <option  value="{{$user->id}}">{{$user->name}}</option>
                                             @endif
                                         @endforeach
                                     </select>
@@ -75,7 +74,7 @@ creer creneau
                                     <label for="matiere_id" class="form-label">Selection matiere</label>
                                     <select class="form-control" name="matiere_id">
                                         @foreach ($matieres as $matiere)
-                                                <option selected value="{{$matiere->id}}">{{$matiere->nom}}</option>
+                                                <option  value="{{$matiere->id}}">{{$matiere->nom}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -85,7 +84,7 @@ creer creneau
                                     <label for="salle_id" class="form-label">Selection Salle</label>
                                     <select class="form-control" name="salle_id">
                                         @foreach ($salles as $salle)
-                                                <option selected value="{{$salle->id}}">{{$salle->nom}}</option>
+                                                <option  value="{{$salle->id}}">{{$salle->nom}}</option>
                                         @endforeach
                                     </select>
                                 </div>

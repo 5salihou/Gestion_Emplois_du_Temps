@@ -56,7 +56,9 @@ lister filiere
             </div>
 
             @if(Gate::allows('access-admin'))
-            <a href="{{ route('filiere.create') }}" class="btn btn-primary my-3">Nouvelle filiere</a>
+                @if(auth()->user()->role=="admin")
+                   <a href="{{ route('filiere.create') }}" class="btn btn-primary my-3">Nouvelle filiere</a>
+                @endif
             @endif
         </div>
         </div>
