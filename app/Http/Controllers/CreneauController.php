@@ -70,7 +70,7 @@ class CreneauController extends Controller
     public function store(Request $request)
     {
         $creneaus=creneau::all();
-        $a=1;
+         $a=1;
         foreach($creneaus as $creneau)
         {
             if($creneau->jour == strval($request->jour))
@@ -98,10 +98,7 @@ class CreneauController extends Controller
                 $a=0;
                 break;
             }
-            else{
-                $a=1;
-            }
-            if($request->heure_debut+$request->heure_fin >4){
+            else if($request->heure_fin-$request->heure_debut > 4){
                 $a=0;
                 break;
             }
@@ -113,13 +110,7 @@ class CreneauController extends Controller
         $creneaus->jour =$request->jour;
         $creneaus->heure_debut =$request->heure_debut;
         $creneaus->heure_fin =$request->heure_fin;
-        $creneaus->salle_id=$request->salle_id;
-        $creneaus->matiere_id=$request->matiere_id;
-        $creneaus->classe_id=$request->classe_id;
-        $creneaus->user_id=$request->user_id;
-        $creneaus->type_intervention_id=$request->type_intervention_id;
-        $creneaus=new creneau($request->all());
-        $creneaus->saveOrFail();
+
         }
         else
         {
@@ -127,6 +118,8 @@ class CreneauController extends Controller
                 'alert' => "erreur de redondance ou l'heure debut est > = heure fin",
             ]);
         }
+        $creneaus=new creneau($request->all());
+        $creneaus->saveOrFail();
         return redirect()->route('creneau.index');
     }
 
