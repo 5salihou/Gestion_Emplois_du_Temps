@@ -72,7 +72,7 @@ class TypeInterventionController extends Controller
                 abort(403,'vous ne pouvez rien modifier');
             }
         }
-        if(!Gate::allow('access-admin')){
+        else{
             abort(403,'vous ne pouvez rien modifier');
         }
         return view('type_intervention.editTypeIntervention', compact('type_intervention'));

@@ -38,7 +38,7 @@ lister filiere
                             @endforeach
                             <td>{{ $filiere->created_at}}</td>
                             @if(Gate::allows('access-admin'))
-                                @if (auth()->user()->role=="admin")
+                                @if(auth()->user()->role=="admin")
                                     <td>
                                         <a href="{{route('filiere.edit',compact('filiere'))}}" class="btn btn-warning">Editer</a>
                                         <form class="d-inline" action="{{ route('filiere.destroy', compact('filiere')) }}" method="post">

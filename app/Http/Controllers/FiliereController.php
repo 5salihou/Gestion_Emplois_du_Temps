@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\filiere;
 use App\Models\departement;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\RedirectResponse;
 
 class FiliereController extends Controller
 {
@@ -67,8 +65,7 @@ class FiliereController extends Controller
             if(auth()->user()->role !="admin"){
                 abort(403,'vous ne pouvez rien modifier');
             }
-        }
-        if(!Gate::allow('access-admin')){
+        }else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $departements=departement::all();
