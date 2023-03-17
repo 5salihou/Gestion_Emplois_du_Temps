@@ -8,7 +8,10 @@ creer creneau
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Formulaire d'ajout d'un creneau</h4>
+                   @if($error != "")
+                    <h6 class="alert alert-danger">{{$error}}</h6>
+                   @endif
+                    <h4 class="card-title">Formulaire d'ajout d'un creneau </h4>
                     <form action="{{ route('creneau.store') }}" method="POST">
                         @csrf
                         <div class="row">

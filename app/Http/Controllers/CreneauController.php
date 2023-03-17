@@ -54,6 +54,7 @@ class CreneauController extends Controller
         $users=User::all();
         $classes=classe::all();
         $creneaus=creneau::all();
+        $error="";
         return view('creneau.new',[
             'users'=>$users,
             'classes'=>$classes,
@@ -61,6 +62,7 @@ class CreneauController extends Controller
             'salles'=>$salles,
             'type_interventions'=>$type_interventions,
             'creneaus'=>$creneaus,
+            'error'=>$error,
         ]);
     }
 
@@ -78,15 +80,18 @@ class CreneauController extends Controller
                 if($creneau->heure_debut == $request->heure_debut){
                     if( $creneau->salle_id == $request->salle_id){
                         $a=0;
+                        $error="redondance salle sur la meme heure et le meme jour";
                     break;
                     }
                     else if( $creneau->classe_id == $request->classe_id)
                     {
                         $a=0;
+                        $error="redondance classe sur la meme heure et le meme jour";
                         break;
                     }
                     else if($creneau->user_id == $request->user_id){
                         $a=0;
+                        $error="redondance professeur sur la meme heure et le meme jour";
                     break;
                     }
                     else{
@@ -96,10 +101,13 @@ class CreneauController extends Controller
                 }
             }else if($creneau->heure_debut >= $request->heure_fin){
                 $a=0;
+
+                $error="l'heure debut ne peut ni etre superieur ni inferieur a l'heure de fin";
                 break;
             }
             else if($request->heure_fin-$request->heure_debut > 4){
                 $a=0;
+                $error="la duree de sceance ne doit pas etre superieur a 4h";
                 break;
             }
             else{
@@ -114,8 +122,20 @@ class CreneauController extends Controller
         }
         else
         {
-            return back()->withErrors([
-                'alert' => "erreur de redondance ou l'heure debut est > = heure fin",
+            $matieres=matiere::all();
+            $salles=salle::all();
+            $type_interventions=type_intervention::all();
+            $users=User::all();
+            $classes=classe::all();
+            $creneaus=creneau::all();
+            return view('creneau.new',[
+                'users'=>$users,
+                'classes'=>$classes,
+                'matieres'=>$matieres,
+                'salles'=>$salles,
+                'type_interventions'=>$type_interventions,
+                'creneaus'=>$creneaus,
+                'error'=>$error,
             ]);
         }
         $creneaus=new creneau($request->all());

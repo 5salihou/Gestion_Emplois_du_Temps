@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\notification;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,7 +16,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return view('notification.createNotification');
+        $notifications=notification::all();
+        return view('notification.show',['notifications'=>$notifications]);
     }
 
     /**
@@ -23,7 +25,7 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        if(!Gate::allows('access-admin')){
+        if(Gate::allows('access-admin')){
             if(auth()->user()->role !="admin"){
                 abort(403,'vous ne pouvez rien modifier');
             }
@@ -38,20 +40,20 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+        $notification=notification::all();
         // Validation
         $request->validate([
             'titre' => 'required',
             'description' => 'required',
-            'user_id' => 'required'
         ]);
-
+        $notification->user_id=auth()->user()->id;
         // initialisation
         $notification = new notification($request->all());
 
         // Enregistrement
         $notification->saveOrFail();
 
-        return redirect()->route('notification.create');
+        return redirect()->route('notification.index');
     }
 
     /**
@@ -67,7 +69,16 @@ class NotificationController extends Controller
      */
     public function edit(notification $notification)
     {
-        //
+        if(Gate::allows('access-admin')){
+            if(auth()->user()->role !="admin"){
+                abort(403,'vous ne pouvez rien modifier');
+            }
+        }
+        else{
+            abort(403,'vous ne pouvez rien modifier');
+        }
+        $users=User::all();
+        return view('notification.reponse',compact('notification','users'));
     }
 
     /**
