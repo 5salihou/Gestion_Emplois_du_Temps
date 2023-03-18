@@ -71,7 +71,7 @@ class EmploisDuTempsController extends Controller
                 abort(403,'vous ne pouvez rien modifier');
             }
         }
-        if(!Gate::allow('access-admin')){
+        else{
             abort(403,'vous ne pouvez rien modifier');
         }
         return view('emplois_du_temps.editEmploisDuTemps', compact('emplois_du_temps'));
@@ -103,7 +103,7 @@ class EmploisDuTempsController extends Controller
                 abort(403,'vous ne pouvez rien modifier');
             }
         }
-        if(!Gate::allow('access-admin')){
+        else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $emplois_du_temps->delete();
