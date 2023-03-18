@@ -99,13 +99,14 @@ class CreneauController extends Controller
                     }
                     $a=1;
                 }
-            }else if($creneau->heure_debut >= $request->heure_fin){
+            }
+            if($creneau->heure_debut >= $request->heure_fin){
                 $a=0;
 
                 $error="l'heure debut ne peut ni etre superieur ni inferieur a l'heure de fin";
                 break;
             }
-            else if($request->heure_fin-$request->heure_debut > 4){
+            if(($request->heure_fin-$request->heure_debut) > 4){
                 $a=0;
                 $error="la duree de sceance ne doit pas etre superieur a 4h";
                 break;
