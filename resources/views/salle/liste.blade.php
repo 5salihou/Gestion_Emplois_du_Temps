@@ -8,7 +8,8 @@ lister salle
         <div class="card">
           <div class="card-body">
             <blockquote class="blockquote mb-0">
-              <p class="alert alert-primary">Liste des salles</p>
+              <p class="alert alert-primary">Liste des salles 
+              </p>
             </blockquote>
             <div class="table-responsive-sm">
                 <table class="table table-bordered table-striped table-hover">
@@ -50,7 +51,9 @@ lister salle
                 </table>
             </div>
             @if(Gate::allows('access-admin'))
-            <a href="{{ route('salle.create') }}" class="btn btn-primary my-3">Nouvelle salle</a>
+                @if (auth()->user()->role=="admin")
+                    <a href="{{ route('salle.create') }}" class="btn btn-primary my-3">Nouvelle salle</a>
+                @endif
             @endif
         </div>
         </div>

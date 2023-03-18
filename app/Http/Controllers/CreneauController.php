@@ -53,12 +53,16 @@ class CreneauController extends Controller
         $type_interventions=type_intervention::all();
         $users=User::all();
         $classes=classe::all();
+        $creneaus=creneau::all();
+        $error="";
         return view('creneau.new',[
             'users'=>$users,
             'classes'=>$classes,
             'matieres'=>$matieres,
             'salles'=>$salles,
             'type_interventions'=>$type_interventions,
+            'creneaus'=>$creneaus,
+            'error'=>$error,
         ]);
     }
 
@@ -67,17 +71,76 @@ class CreneauController extends Controller
      */
     public function store(Request $request)
     {
-        $creneau=creneau::all();
-        $creneau->jour =$request->jour;
-        $creneau->heure_debut =$request->heure_debut;
-        $creneau->heure_fin =$request->heure_fin;
-        $creneau->salle_id=$request->salle_id;
-        $creneau->matiere_id=$request->matiere_id;
-        $creneau->classe_id=$request->classe_id;
-        $creneau->user_id=$request->user_id;
-        $creneau->type_intervention_id=$request->type_intervention_id;
-        $creneau=new creneau($request->all());
-        $creneau->saveOrFail();
+        $creneaus=creneau::all();
+         $a=1;
+        foreach($creneaus as $creneau)
+        {
+            if($creneau->jour == strval($request->jour))
+            {
+                if($creneau->heure_debut == $request->heure_debut){
+                    if( $creneau->salle_id == $request->salle_id){
+                        $a=0;
+                        $error="redondance salle sur la meme heure et le meme jour";
+                    break;
+                    }
+                    else if( $creneau->classe_id == $request->classe_id)
+                    {
+                        $a=0;
+                        $error="redondance classe sur la meme heure et le meme jour";
+                        break;
+                    }
+                    else if($creneau->user_id == $request->user_id){
+                        $a=0;
+                        $error="redondance professeur sur la meme heure et le meme jour";
+                    break;
+                    }
+                    else{
+                        $a=1;
+                    }
+                    $a=1;
+                }
+            }
+            if($creneau->heure_debut >= $request->heure_fin){
+                $a=0;
+
+                $error="l'heure debut ne peut ni etre superieur ni inferieur a l'heure de fin";
+                break;
+            }
+            if(($request->heure_fin-$request->heure_debut) > 4){
+                $a=0;
+                $error="la duree de sceance ne doit pas etre superieur a 4h";
+                break;
+            }
+            else{
+                $a=1;
+            }
+        }
+        if($a==1){
+        $creneaus->jour =$request->jour;
+        $creneaus->heure_debut =$request->heure_debut;
+        $creneaus->heure_fin =$request->heure_fin;
+
+        }
+        else
+        {
+            $matieres=matiere::all();
+            $salles=salle::all();
+            $type_interventions=type_intervention::all();
+            $users=User::all();
+            $classes=classe::all();
+            $creneaus=creneau::all();
+            return view('creneau.new',[
+                'users'=>$users,
+                'classes'=>$classes,
+                'matieres'=>$matieres,
+                'salles'=>$salles,
+                'type_interventions'=>$type_interventions,
+                'creneaus'=>$creneaus,
+                'error'=>$error,
+            ]);
+        }
+        $creneaus=new creneau($request->all());
+        $creneaus->saveOrFail();
         return redirect()->route('creneau.index');
     }
 

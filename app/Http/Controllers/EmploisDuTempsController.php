@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\emplois_du_temps;
+use App\Models\creneau;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 
@@ -56,31 +57,31 @@ class EmploisDuTempsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(emplois_du_temps $emplois_du_temps, $id)
+    public function show(creneau $creneau, $id)
     {
-        return view('emplois_du_temps.showEmploisDuTemps', ['$id'] , compact('emplois_du_temps'));
+        return view('emplois_du_temps.showEmploisDuTemps', ['$id'] , compact('creneau'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(emplois_du_temps $emplois_du_temps)
+    public function edit(emplois_du_temps $emplois_du_temps, $id)
     {
         if(Gate::allows('access-admin')){
             if(auth()->user()->role !="admin"){
                 abort(403,'vous ne pouvez rien modifier');
             }
         }
-        if(!Gate::allow('access-admin')){
+        else{
             abort(403,'vous ne pouvez rien modifier');
         }
-        return view('emplois_du_temps.editEmploisDuTemps', compact('emplois_du_temps'));
+        return view('emplois_du_temps.editEmploisDuTemps',['$id'], compact('emplois_du_temps'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, emplois_du_temps $emplois_du_temps)
+    public function update(Request $request, emplois_du_temps $emplois_du_temps,$id)
     {
          // Validation
          $request->validate([
@@ -90,7 +91,7 @@ class EmploisDuTempsController extends Controller
         //modification
         $emplois_du_temps->update($request->all());
 
-        return redirect()->route('emplois_du_temps.index');
+        return redirect()->route('emplois_du_temps.index', ['$id']);
     }
 
     /**
@@ -103,7 +104,7 @@ class EmploisDuTempsController extends Controller
                 abort(403,'vous ne pouvez rien modifier');
             }
         }
-        if(!Gate::allow('access-admin')){
+        else{
             abort(403,'vous ne pouvez rien modifier');
         }
         $emplois_du_temps->delete();

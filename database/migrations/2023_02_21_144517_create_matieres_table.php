@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('matieres', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->time('duree');
+            $table->integer('duree');
             $table->string('sigle')->unique();
             $table->string('domaine');
             $table->timestamps();
