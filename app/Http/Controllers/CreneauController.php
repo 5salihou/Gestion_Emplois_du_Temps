@@ -73,6 +73,8 @@ class CreneauController extends Controller
     {
         $creneaus=creneau::all();
          $a=1;
+         $salles=salle::all();
+         $classes=classe::all();
         foreach($creneaus as $creneau)
         {
             if($creneau->jour == strval($request->jour))
@@ -113,6 +115,21 @@ class CreneauController extends Controller
             }
             else{
                 $a=1;
+            }
+
+        }
+        foreach($classes as $classe){
+            if($request->classe_id==$classe->id){
+                foreach($salles as $salle){
+                    if($request->salle_id==$salle->id){
+                        if($classe->nombre>$salle->nombre){
+                            $a=0;
+                            $error="la salle est trop petite pour contenir cette classe";
+                            break;
+                        }
+                    }
+                }
+                break;
             }
         }
         if($a==1){
