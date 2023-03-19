@@ -42,6 +42,7 @@ class ClasseController extends Controller
     {
         $classe=classe::all();
         $classe->nom =$request->nom;
+        $classe->nombre =$request->nombre;
         $classe->filiere_id=$request->filiere_id;
         $classe=new classe($request->all());
         $classe->saveOrFail();
