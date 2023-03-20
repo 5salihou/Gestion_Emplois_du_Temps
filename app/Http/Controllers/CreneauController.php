@@ -71,6 +71,7 @@ class CreneauController extends Controller
      */
     public function store(Request $request)
     {
+        $error="";
         $creneaus=creneau::all();
          $a=1;
         foreach($creneaus as $creneau)
@@ -157,6 +158,7 @@ class CreneauController extends Controller
      */
     public function edit(creneau $creneau)
     {
+        $error="";
         if(Gate::allows('access-admin')){
             if(auth()->user()->role !="admin"){
                 abort(403,'vous ne pouvez rien modifier');
@@ -170,13 +172,14 @@ class CreneauController extends Controller
         $type_interventions=type_intervention::all();
         $users=User::all();
         $classes=classe::all();
-        return view('creneau.new',[
+        return view('creneau.edit',[
             'users'=>$users,
             'classes'=>$classes,
             'matieres'=>$matieres,
             'salles'=>$salles,
             'type_interventions'=>$type_interventions,
-            'creneau'=>$creneau
+            'creneau'=>$creneau,
+            'error'=>$error
         ]);
     }
 
