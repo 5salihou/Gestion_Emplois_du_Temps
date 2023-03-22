@@ -30,6 +30,15 @@ editer classe
                                     @enderror
                                 </div>
                                 <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="number" value="{{ old('nombre') ?? $classe->nombre }}" class="form-control"
+                                        name="nombre" id="nombre" aria-describedby="helpNombreId"
+                                        placeholder="Nombre de la tache">
+                                    @error('nombre')
+                                        <small id="helpNomId" class="form-text text-muted">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
                                     <label for="filiere_id" class="form-label">Selection filiere</label>
                                     <select class="form-control" name="filiere_id">
                                         @foreach ($filieres as $filiere)

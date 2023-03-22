@@ -12,11 +12,14 @@
                         <form action="{{ route('emplois_du_temps.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-3">
                                     <div class="mb-3">
-                                        <label for="nom" class="form-label">NOM</label>
-                                        <input type="text" class="form-control" name="nom" id="nom"
-                                            aria-describedby="helpNomId" placeholder="Nom de la emploi_du_temps" required>
+                                        <label for="classe_id" class="form-label">Selection classe</label>
+                                        <select class="form-control" name="classe_id">
+                                            @foreach ($classes as $classe)
+                                                    <option selected value="{{$classe->id}}">{{$classe->nom}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
