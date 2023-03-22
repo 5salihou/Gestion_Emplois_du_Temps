@@ -21,6 +21,13 @@ creer classe
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="number" class="form-control" name="nombre" id="nombre"
+                                        aria-describedby="helpNombreId" placeholder="Nombre de la classe">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
                                     <label for="filiere_id" class="form-label">Selection filiere</label>
                                     <select class="form-control" name="filiere_id">
                                         @foreach ($filieres as $filiere)
