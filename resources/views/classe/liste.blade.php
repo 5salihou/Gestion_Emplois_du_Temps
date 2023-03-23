@@ -16,6 +16,7 @@ lister classe
                         <tr>
                             <th scope="col">N°</th>
                             <th scope="col">Nom</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">filiere d'appartenance</th>
                             <th scope="col">date de creation</th>
                             @if(Gate::allows('access-admin'))
@@ -30,6 +31,7 @@ lister classe
                         <tr class="">
                             <td scope="row">{{$loop->index+1}}</td>
                             <td>{{ $classe->nom }}</td>
+                            <td>{{ $classe->nombre }}</td>
                             @foreach ($filieres as $filiere)
                                 @if($classe->filiere_id==$filiere->id)
 

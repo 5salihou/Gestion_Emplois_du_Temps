@@ -74,15 +74,19 @@ class CreneauController extends Controller
         $error="";
         $creneaus=creneau::all();
          $a=1;
+         $salles=salle::all();
+         $classes=classe::all();
         foreach($creneaus as $creneau)
         {
             if($creneau->jour == strval($request->jour))
             {
-                if($creneau->heure_debut == $request->heure_debut){
-                    if( $creneau->salle_id == $request->salle_id){
+                if($creneau->heure_debut == $request->heure_debut)
+                {
+                    if( $creneau->salle_id == $request->salle_id)
+                    {
                         $a=0;
                         $error="redondance salle sur la meme heure et le meme jour";
-                    break;
+                        break;
                     }
                     else if( $creneau->classe_id == $request->classe_id)
                     {
@@ -115,11 +119,27 @@ class CreneauController extends Controller
             else{
                 $a=1;
             }
+
         }
-        if($a==1){
-        $creneaus->jour =$request->jour;
-        $creneaus->heure_debut =$request->heure_debut;
-        $creneaus->heure_fin =$request->heure_fin;
+        foreach($classes as $classe){
+            if($request->classe_id==$classe->id){
+                foreach($salles as $salle){
+                    if($request->salle_id==$salle->id){
+                        if($classe->nombre>$salle->nombre){
+                            $a=0;
+                            $error="la salle est trop petite pour contenir cette classe";
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        if($a==1)
+        {
+            $creneaus->jour =$request->jour;
+            $creneaus->heure_debut =$request->heure_debut;
+            $creneaus->heure_fin =$request->heure_fin;
 
         }
         else

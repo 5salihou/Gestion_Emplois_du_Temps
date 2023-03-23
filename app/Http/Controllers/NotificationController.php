@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\notification;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Mail\sendNewNotification;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
 
 class NotificationController extends Controller
@@ -16,8 +18,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
+        $transmis="";
         $notifications=notification::all();
-        return view('notification.show',['notifications'=>$notifications]);
+        return view('notification.show',['notifications'=>$notifications,'transmis'=>$transmis]);
     }
 
     /**
@@ -25,12 +28,8 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        if(Gate::allows('access-admin')){
-            if(auth()->user()->role !="admin"){
+        if(!Gate::allows('access-admin')){
                 abort(403,'vous ne pouvez rien modifier');
-            }
-        }else{
-            abort(403,'vous ne pouvez rien modifier');
         }
         return view('notification.createNotification');
     }
@@ -45,15 +44,18 @@ class NotificationController extends Controller
         $request->validate([
             'titre' => 'required',
             'description' => 'required',
+            // 'User_id'=>''
         ]);
-        $notification->user_id=auth()->user()->id;
+
+        // $notification->user_id=auth()->user()->id;
         // initialisation
         $notification = new notification($request->all());
-
+        $user=['email'=>'as149045@gmail.com','name'=>auth()->user()->name];
+        $transmis="transmis avec succes au administrateur";
         // Enregistrement
         $notification->saveOrFail();
-
-        return redirect()->route('notification.index');
+        Mail::to('as149045@gmail.com')->send(new sendNewNotification($user));
+        return view('notification.show',['transmis'=>$transmis,'titre'=>$request->titre]);
     }
 
     /**
