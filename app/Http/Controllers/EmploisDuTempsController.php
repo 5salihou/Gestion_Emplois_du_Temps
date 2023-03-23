@@ -11,7 +11,6 @@ use App\Models\type_intervention;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\emplois_du_temps;
-use App\Models\creneau;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 
