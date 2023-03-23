@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\salle;
+use App\Models\classe;
+use App\Models\creneau;
+use App\Models\matiere;
+use App\Models\type_intervention;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\emplois_du_temps;
-use App\Models\creneau;
-use App\Models\matiere;
-use App\Models\User;
-use App\Models\type_intervention;
-use App\Models\classe;
-use App\Models\salle;
-use Error;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 
@@ -26,6 +25,20 @@ class EmploisDuTempsController extends Controller
         return view('emplois_du_temps.listEmploisDuTemps', compact('classes'));
     }
 
+    public function prof(){
+        $matieres=matiere::all();
+        $salles=salle::all();
+        $type_interventions=type_intervention::all();
+        $classes=classe::all();
+        $emplois_du_temps=creneau::all();
+        return view('emplois_du_temps.emploisDuTempsProf',[
+            'emplois_du_temps'=>$emplois_du_temps,
+            'classes'=>$classes,
+            'type_interventions'=>$type_interventions,
+            'salles'=>$salles,
+            'matieres'=>$matieres
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
