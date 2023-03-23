@@ -12,7 +12,8 @@ class notification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','user_id','titre','description'];
+    protected $fillable = ['titre','description',];
+    protected $guarded = ['id',];
 
     public function user(): BelongsTo
     {

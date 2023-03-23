@@ -35,6 +35,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/professeur', [App\Http\Controllers\EmploisDuTempsController::class, 'prof'])->name('professeur');
 
 // routes des matieres
 Route::resource('matiere', MatiereController::class);
@@ -43,7 +44,7 @@ Route::resource('matiere', MatiereController::class);
 
 // routes des notifications
 Route::resource('notification', NotificationController::class);
-
+                    
 // routes des types d'interventions
 Route::resource('type_intervention', TypeInterventionController::class);
 
