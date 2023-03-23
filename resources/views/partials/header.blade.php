@@ -17,15 +17,12 @@
                 </li>
             @endif
         @else
-            <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle text-secondary" href="#"><span> {{ auth()->user()->name }} </span> <i
-                        class="bi bi-chevron-down"></i></a>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle text-secondary" href="#">
+                {{ auth()->user()->name }}<i class="bi bi-chevron-down"></i></a>
                 <ul>
-                    <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#">Profil</a>
-                    </li>
-                    <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle text-danger"
-                            onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"
-                            href="{{ route('logout') }}">Se déconnecter</a>
+                    <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#">Profil</a></li>
+                    <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle "onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();" href="{{ route('logout') }}">Se déconnecter</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
