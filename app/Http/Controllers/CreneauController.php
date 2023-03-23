@@ -79,11 +79,13 @@ class CreneauController extends Controller
         {
             if($creneau->jour == strval($request->jour))
             {
-                if($creneau->heure_debut == $request->heure_debut){
-                    if( $creneau->salle_id == $request->salle_id){
+                if($creneau->heure_debut == $request->heure_debut)
+                {
+                    if( $creneau->salle_id == $request->salle_id)
+                    {
                         $a=0;
                         $error="redondance salle sur la meme heure et le meme jour";
-                    break;
+                        break;
                     }
                     else if( $creneau->classe_id == $request->classe_id)
                     {
@@ -132,10 +134,11 @@ class CreneauController extends Controller
                 break;
             }
         }
-        if($a==1){
-        $creneaus->jour =$request->jour;
-        $creneaus->heure_debut =$request->heure_debut;
-        $creneaus->heure_fin =$request->heure_fin;
+        if($a==1)
+        {
+            $creneaus->jour =$request->jour;
+            $creneaus->heure_debut =$request->heure_debut;
+            $creneaus->heure_fin =$request->heure_fin;
 
         }
         else

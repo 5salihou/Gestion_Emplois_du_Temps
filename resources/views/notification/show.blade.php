@@ -42,9 +42,11 @@ lister des notifications
                                         </form>
                                     </td>
                                 @endif
-                                @if (auth()->user()->role=="admin")
-                                  <a href="{{route('notification.edit',compact('notification'))}}" class="btn btn-warning">reponse</a>
-                                @endif
+                                <td>
+                                    @if (auth()->user()->role=="admin")
+                                      <a href="{{route('notification.edit',compact('notification'))}}" class="btn btn-warning">reponse</a>
+                                    @endif
+                                </td>
                             @endif
                         </tr>
                         @endforeach

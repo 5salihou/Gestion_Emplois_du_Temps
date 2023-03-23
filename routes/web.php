@@ -35,6 +35,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/professeur', [App\Http\Controllers\EmploisDuTempsController::class, 'prof'])->name('professeur');
 
 // routes des matieres
 Route::resource('matiere', MatiereController::class);
