@@ -18,8 +18,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
+        $transmis="";
         $notifications=notification::all();
-        return view('notification.show',['notifications'=>$notifications]);
+        return view('notification.show',['notifications'=>$notifications,'transmis'=>$transmis]);
     }
 
     /**
@@ -49,11 +50,12 @@ class NotificationController extends Controller
         // $notification->user_id=auth()->user()->id;
         // initialisation
         $notification = new notification($request->all());
-        $user=['email'=>'as1233@gmail.nm','name'=>'monsieu gd'];
+        $user=['email'=>'as149045@gmail.com','name'=>auth()->user()->name];
+        $transmis="transmis avec succes au administrateur";
         // Enregistrement
         $notification->saveOrFail();
-        Mail::to('test@mail.test')->send(new sendNewNotification($user));
-        return redirect()->route('notification.index');
+        Mail::to('as149045@gmail.com')->send(new sendNewNotification($user));
+        return view('notification.show',['transmis'=>$transmis,'titre'=>$request->titre]);
     }
 
     /**

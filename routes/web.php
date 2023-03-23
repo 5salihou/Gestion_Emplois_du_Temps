@@ -44,7 +44,7 @@ Route::resource('matiere', MatiereController::class);
 
 // routes des notifications
 Route::resource('notification', NotificationController::class);
-
+                    
 // routes des types d'interventions
 Route::resource('type_intervention', TypeInterventionController::class);
 
