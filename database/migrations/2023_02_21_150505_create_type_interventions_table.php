@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('type_interventions', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->time('duree');
+            $table->integer('duree');
             $table->timestamps();
         });
     }
