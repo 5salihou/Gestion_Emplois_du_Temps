@@ -20,11 +20,11 @@
             <li class="nav-item dropdown no-arrow ">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                     aria-expanded="false">
-                    Profil
+                    <span> {{ auth()->user()->name }}
+                </span> <i class="bi bi-chevron-down"></i>
                 </a>
                 <ul class="dropdown-menu ml-auto">
-                    <li class="txt-primary"><a class="dropdown-item" href="#"><span> {{ auth()->user()->name }}
-                            </span> <i class="bi bi-chevron-down"></i></a>
+                    <li class="txt-primary"><a class="dropdown-item" href="#">Profil</a>
                     <li class="txt-primary"><a class="dropdown-item"
                             onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"
