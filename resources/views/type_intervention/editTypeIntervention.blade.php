@@ -33,7 +33,7 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="duree" class="form-label">DUREE</label>
-                                        <input type="time" value="{{ old('duree') ?? $type_intervention->duree }}" class="form-control"
+                                        <input type="int" value="{{ old('duree') ?? $type_intervention->duree }}" class="form-control"
                                             name="duree" id="duree" aria-describedby="helpNomId"
                                             placeholder="duree de la type_intervention">
                                         @error('duree')
