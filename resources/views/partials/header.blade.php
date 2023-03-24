@@ -17,7 +17,7 @@
                 </li>
             @endif
         @else
-            <li class="nav-item dropdown no-arrow ">
+            <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                     aria-expanded="false">
                     <span> {{ auth()->user()->name }}
