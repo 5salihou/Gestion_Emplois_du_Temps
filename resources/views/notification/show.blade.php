@@ -12,7 +12,7 @@ lister des notifications
                   <h4 class="alert-heading">titre message:{{$titre}}</h4>
                   <p>votre message</p>
                   <hr>
-                  <p class="mb-0">est {{$transmis}}</p>
+                  <p class="mb-0">{{$transmis}}</p>
                 </div>
             @endif
             @if (auth()->user()->role=="admin")
@@ -27,6 +27,11 @@ lister des notifications
                               <th scope="col">Titre</th>
                               <th scope="col">Description</th>
                               <th scope="col">Date du message</th>
+                              @if(Gate::allows('access-admin'))
+                                @if(auth()->user()->role=="admin")
+                                  <th scope="col">Action</th>
+                                @endif
+                              @endif
                           </tr>
                       </thead>
                       <tbody >
@@ -37,14 +42,14 @@ lister des notifications
                               <td>{{ $notification->description}}</td>
                               <td>{{ $notification->created_at}}</td>
                               @if(Gate::allows('access-admin'))
-                                  @if(auth()->user()->id==$notification->user_id)
-                                      <td>
-                                          <form class="d-inline" action="{{ route('notification.destroy', compact('notification')) }}" method="post">
+                              @if(auth()->user()->role=="admin")
+                                    <td>
+                                        <form class="d-inline" action="{{ route('notification.destroy', compact('notification')) }}" method="post">
                                               @csrf
                                               @method('delete')
                                               <button type="submit" class="btn btn-danger">Supprimer</button>
-                                          </form>
-                                      </td>
+                                        </form>
+                                    </td>
                                   @endif
                               @endif
                           </tr>
@@ -54,7 +59,9 @@ lister des notifications
               </div>
             @endif
             @if(Gate::allows('access-admin'))
-                <a href="{{ route('notification.create') }}" class="btn btn-primary my-3">Nouvelle notification</a>
+                @if (auth()->user()->role!="admin")
+                   <a href="{{ route('notification.create') }}" class="btn btn-primary my-3">Nouvelle notification</a>
+                @endif
             @endif
         </div>
         </div>
