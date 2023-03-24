@@ -18,9 +18,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $transmis="";
-        $notifications=notification::all();
-        return view('notification.show',['notifications'=>$notifications,'transmis'=>$transmis]);
+        $transmis = "";
+        $notifications = notification::all();
+        return view('notification.show', ['notifications' => $notifications, 'transmis' => $transmis]);
     }
 
     /**
@@ -28,8 +28,8 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        if(!Gate::allows('access-admin')){
-                abort(403,'vous ne pouvez rien modifier');
+        if (!Gate::allows('access-admin')) {
+            abort(403, 'vous ne pouvez rien modifier');
         }
         return view('notification.createNotification');
     }
@@ -39,23 +39,35 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        $notification=notification::all();
+        $notifications = notification::all();
         // Validation
         $request->validate([
             'titre' => 'required',
             'description' => 'required',
             // 'User_id'=>''
         ]);
-
+        foreach ($notifications as $existe) {
+            if ($existe->titre == str($request->titre) and $existe->description == str($request->description)) {
+                $a = 0;
+                break;
+            } else {
+                $a = 1;
+            }
+        }
+        if ($a == 1) {
+            $notification = new notification($request->all());
+            $user = ['email' => 'as149045@gmail.com', 'name' => auth()->user()->name];
+            $transmis = " est transmis avec succes au administrateur";
+            // Enregistrement
+            $notification->saveOrFail();
+            Mail::to('as149045@gmail.com')->send(new sendNewNotification($user));
+        } else {
+            $transmis = "n'a pas ete transmis car il est deja en traitement";
+        }
         // $notification->user_id=auth()->user()->id;
         // initialisation
-        $notification = new notification($request->all());
-        $user=['email'=>'as149045@gmail.com','name'=>auth()->user()->name];
-        $transmis="transmis avec succes au administrateur";
-        // Enregistrement
-        $notification->saveOrFail();
-        Mail::to('as149045@gmail.com')->send(new sendNewNotification($user));
-        return view('notification.show',['transmis'=>$transmis,'titre'=>$request->titre]);
+
+        return view('notification.show', ['transmis' => $transmis, 'titre' => $request->titre]);
     }
 
     /**
@@ -71,16 +83,15 @@ class NotificationController extends Controller
      */
     public function edit(notification $notification)
     {
-        if(Gate::allows('access-admin')){
-            if(auth()->user()->role !="admin"){
-                abort(403,'vous ne pouvez rien modifier');
+        if (Gate::allows('access-admin')) {
+            if (auth()->user()->role != "admin") {
+                abort(403, 'vous ne pouvez rien modifier');
             }
+        } else {
+            abort(403, 'vous ne pouvez rien modifier');
         }
-        else{
-            abort(403,'vous ne pouvez rien modifier');
-        }
-        $users=User::all();
-        return view('notification.reponse',compact('notification','users'));
+        $users = User::all();
+        return view('notification.reponse', compact('notification', 'users'));
     }
 
     /**
@@ -96,6 +107,14 @@ class NotificationController extends Controller
      */
     public function destroy(notification $notification)
     {
-        //
+        if (Gate::allows('access-admin')) {
+            if (auth()->user()->role != "admin") {
+                abort(403, 'vous ne pouvez rien modifier');
+            }
+        } else {
+            abort(403, 'vous ne pouvez rien modifier');
+        }
+        $notification->deleteOrFail();
+        return redirect()->route('notification.index');
     }
 }

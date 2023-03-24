@@ -42,6 +42,7 @@ lister classe
                             @if(Gate::allows('access-admin'))
                                 @if (auth()->user()->role=="admin")
                                     <td>
+                                        <a href="{{route('classe.show',compact('classe'))}}" class="btn btn-warning">Voir</a>
                                         <a href="{{route('classe.edit',compact('classe'))}}" class="btn btn-warning">Editer</a>
                                         <form class="d-inline" action="{{ route('classe.destroy', compact('classe')) }}" method="post">
                                             @csrf
