@@ -52,9 +52,10 @@ class ClasseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(classe $classe)
+    public function show(classe $classe, )
     {
-        //
+        $filiere = filiere::all();
+        return view('classe.show', compact('classe','filiere'));
     }
 
     /**
