@@ -21,9 +21,18 @@
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                     aria-expanded="false">
                     <span> {{ auth()->user()->name }}
-                </span> <i class="bi bi-chevron-down"></i>
+                    </span> <i class="bi bi-chevron-down"></i>
                 </a>
                 <ul class="dropdown-menu ml-auto">
+                    @if (Gate::allows('access-admin'))
+                        @if (auth()->user()->role == 'professeur' || auth()->user()->role == 'admin')
+                            <li class="txt-primary">
+                                <a class="dropdown-item" href="{{ route('professeur') }}">
+                                    <span> {{ __('mon emplois du temps') }} </span>
+                                </a>
+                            </li>
+                        @endif
+                    @endif
                     <li class="txt-primary"><a class="dropdown-item" href="#">Profil</a>
                     <li class="txt-primary"><a class="dropdown-item"
                             onclick="event.preventDefault();
