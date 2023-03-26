@@ -9,7 +9,7 @@
                 <div class="col-md col-xl-5 d-flex align-items-center">
                     <a class="navbar-brand align-items-center" href="index.html">
                     GESTION-EDT
-                    <span>Pous une bonne Gestion de vos &amp; Emplois du temps</span>
+                    <span>Pous une bonne Gestion de vos Emplois du temps</span>
                     </a>
                 </div>
 
