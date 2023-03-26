@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('titre')
-lister creneau de la
+    {{-- @foreach ($classe as $classe)
+        @if ($creneaus->classe_id == $classe->id)
+            <p class="card-text">lister creneau de la classe : {{ $classe->nom }}</p>
+        @endif
+    @endforeach --}}
 @endsection
 @section('content')
 <div class="row-12">
