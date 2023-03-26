@@ -55,7 +55,7 @@
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="duree" class="form-label">DUREE</label>
-                                        <input type="time" value="{{ old('duree') ?? $matiere->duree }}" class="form-control"
+                                        <input type="number" value="{{ old('duree') ?? $matiere->duree }}" class="form-control"
                                             name="duree" id="duree" aria-describedby="helpNomId"
                                             placeholder="duree de la matiere">
                                         @error('duree')
