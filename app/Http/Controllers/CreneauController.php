@@ -127,6 +127,12 @@ class CreneauController extends Controller
             $creneaus->jour = $request->jour;
             $creneaus->heure_debut = $request->heure_debut;
             $creneaus->heure_fin = $request->heure_fin;
+            $creneaus->salle_id=$request->salle_id;
+            $creneaus->classe_id=$request->classe_id;
+            $creneaus->matiere_id=$request->matiere_id;
+            $creneaus->user_id=$request->user_id;
+            $creneaus->type_intervention_id=$request->type_intervention_id;
+
         } else {
             $matieres = matiere::all();
             $salles = salle::all();
@@ -191,18 +197,86 @@ class CreneauController extends Controller
      */
     public function update(Request $request, creneau $creneau)
     {
-        $request->validate([
-            'jour' => 'required,' . $creneau->id,
-            'heure_debut' => 'require' . $creneau->id,
-            'heure_fin|unique:Users,password,' . $creneau->id,
-            'sale_id' => 'required' . $creneau->id,
-            'matiere_id' => 'required' . $creneau->id,
-            'user_id' => 'required' . $creneau->id,
-            'classe_id' => 'required' . $creneau->id,
-            'type_intervention_id' => 'required' . $creneau->id,
-        ]);
-        $creneau->updateOrFail($request->all());
-        return redirect()->route('creneau.index');
+        $error="";
+        $creneaus = creneau::all();
+        $a = 0;
+        $salles = salle::all();
+        $classes = classe::all();
+         foreach ($creneaus as $creneau) {
+            if ($creneau->jour == strval($request->jour)) {
+                if ($creneau->heure_debut == $request->heure_debut) {
+                    if ($creneau->salle_id == $request->salle_id) {
+                        $a = $a+1;
+                        $error = "redondance salle sur la meme heure et le meme jour";
+
+                    } else if ($creneau->classe_id == $request->classe_id) {
+                        $a = $a+1;
+                        $error = "redondance classe sur la meme heure et le meme jour";
+
+                    } else if ($creneau->user_id == $request->user_id) {
+                        $a = $a+1;
+                        $error = "redondance professeur sur la meme heure et le meme jour";
+
+                    } else {
+                        $a=$a;
+                    }
+                    $a=$a;
+                }
+                $a=$a;
+            }
+            if ($request->heure_debut >= $request->heure_fin) {
+                $a = $a+1;
+                $error = "l'heure debut ne peut ni etre superieur ni inferieur a l'heure de fin";
+            }
+            if (($request->heure_fin - $request->heure_debut) > 4) {
+                $a = $a+1;
+                $error = "la duree de sceance ne doit pas etre superieur a 4h";
+            } else {
+                $a = $a;
+            }
+        }
+        foreach ($classes as $classe) {
+            if ($request->classe_id == $classe->id) {
+                foreach ($salles as $salle) {
+                    if ($request->salle_id == $salle->id) {
+                        if ($classe->nombre > $salle->nombre) {
+                            $a = $a+1;
+                            $error = "la salle est trop petite pour contenir cette classe";
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        if ($a <= 1) {
+            $creneau->jour = $request->jour;
+            $creneau->heure_debut = $request->heure_debut;
+            $creneau->heure_fin = $request->heure_fin;
+            $creneau->salle_id = $request->salle_id;
+            $creneau->matiere_id = $request->matiere_id;
+            $creneau->user_id = $request->user_id;
+            $creneau->classe_id = $request->classe_id;
+            $creneau->type_intervention_id = $request->type_intervention_id;
+            $creneau->updateOrFail($request->all());
+            return redirect()->route('creneau.index');
+        } else {
+            $matieres = matiere::all();
+            $salles = salle::all();
+            $type_interventions = type_intervention::all();
+            $users = User::all();
+            $classes = classe::all();
+        return view('creneau.edit', [
+            'users' => $users,
+            'classes' => $classes,
+            'matieres' => $matieres,
+            'salles' => $salles,
+            'type_interventions' => $type_interventions,
+            'creneau' => $creneau,
+            'error' => $error]);
+        }
+
+
     }
 
     /**
