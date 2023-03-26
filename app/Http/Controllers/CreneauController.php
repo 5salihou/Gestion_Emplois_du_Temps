@@ -19,19 +19,19 @@ class CreneauController extends Controller
      */
     public function index()
     {
-        $matieres=matiere::all();
-        $salles=salle::all();
-        $type_interventions=type_intervention::all();
-        $users=User::all();
-        $creneaus=creneau::all();
-        $classes=classe::all();
-        return view('creneau.liste',[
-            'users'=>$users,
-            'classes'=>$classes,
-            'matieres'=>$matieres,
-            'salles'=>$salles,
-            'type_interventions'=>$type_interventions,
-            'creneaus'=>$creneaus,
+        $matieres = matiere::all();
+        $salles = salle::all();
+        $type_interventions = type_intervention::all();
+        $users = User::all();
+        $creneaus = creneau::all();
+        $classes = classe::all();
+        return view('creneau.liste', [
+            'users' => $users,
+            'classes' => $classes,
+            'matieres' => $matieres,
+            'salles' => $salles,
+            'type_interventions' => $type_interventions,
+            'creneaus' => $creneaus,
         ]);
     }
 
@@ -40,29 +40,28 @@ class CreneauController extends Controller
      */
     public function create()
     {
-        if(Gate::allows('access-admin')){
-            if(auth()->user()->role !="admin"){
-                abort(403,'vous ne pouvez rien modifier');
+        if (Gate::allows('access-admin')) {
+            if (auth()->user()->role != "admin") {
+                abort(403, 'vous ne pouvez rien modifier');
             }
+        } else {
+            abort(403, 'vous ne pouvez rien modifier');
         }
-        else{
-            abort(403,'vous ne pouvez rien modifier');
-        }
-        $matieres=matiere::all();
-        $salles=salle::all();
-        $type_interventions=type_intervention::all();
-        $users=User::all();
-        $classes=classe::all();
-        $creneaus=creneau::all();
-        $error="";
-        return view('creneau.new',[
-            'users'=>$users,
-            'classes'=>$classes,
-            'matieres'=>$matieres,
-            'salles'=>$salles,
-            'type_interventions'=>$type_interventions,
-            'creneaus'=>$creneaus,
-            'error'=>$error,
+        $matieres = matiere::all();
+        $salles = salle::all();
+        $type_interventions = type_intervention::all();
+        $users = User::all();
+        $classes = classe::all();
+        $creneaus = creneau::all();
+        $error = "";
+        return view('creneau.new', [
+            'users' => $users,
+            'classes' => $classes,
+            'matieres' => $matieres,
+            'salles' => $salles,
+            'type_interventions' => $type_interventions,
+            'creneaus' => $creneaus,
+            'error' => $error,
         ]);
     }
 
@@ -71,63 +70,53 @@ class CreneauController extends Controller
      */
     public function store(Request $request)
     {
-        $error="";
-        $creneaus=creneau::all();
-         $a=1;
-         $salles=salle::all();
-         $classes=classe::all();
-        foreach($creneaus as $creneau)
-        {
-            if($creneau->jour == strval($request->jour))
-            {
-                if($creneau->heure_debut == $request->heure_debut)
-                {
-                    if( $creneau->salle_id == $request->salle_id)
-                    {
-                        $a=0;
-                        $error="redondance salle sur la meme heure et le meme jour";
+        $error = "";
+        $creneaus = creneau::all();
+        $a = 1;
+        $salles = salle::all();
+        $classes = classe::all();
+        foreach ($creneaus as $creneau) {
+            if ($creneau->jour == strval($request->jour)) {
+                if ($creneau->heure_debut == $request->heure_debut) {
+                    if ($creneau->salle_id == $request->salle_id) {
+                        $a = 0;
+                        $error = "redondance salle sur la meme heure et le meme jour";
                         break;
-                    }
-                    else if( $creneau->classe_id == $request->classe_id)
-                    {
-                        $a=0;
-                        $error="redondance classe sur la meme heure et le meme jour";
+                    } else if ($creneau->classe_id == $request->classe_id) {
+                        $a = 0;
+                        $error = "redondance classe sur la meme heure et le meme jour";
                         break;
+                    } else if ($creneau->user_id == $request->user_id) {
+                        $a = 0;
+                        $error = "redondance professeur sur la meme heure et le meme jour";
+                        break;
+                    } else {
+                        $a = 1;
                     }
-                    else if($creneau->user_id == $request->user_id){
-                        $a=0;
-                        $error="redondance professeur sur la meme heure et le meme jour";
-                    break;
-                    }
-                    else{
-                        $a=1;
-                    }
-                    $a=1;
+                    $a = 1;
                 }
             }
-            if($creneau->heure_debut >= $request->heure_fin){
-                $a=0;
+            if ($request->heure_debut >= $request->heure_fin) {
+                $a = 0;
 
-                $error="l'heure debut ne peut ni etre superieur ni inferieur a l'heure de fin";
+                $error = "l'heure debut ne peut ni etre superieur ni inferieur a l'heure de fin";
                 break;
             }
-            if(($request->heure_fin-$request->heure_debut) > 4){
-                $a=0;
-                $error="la duree de sceance ne doit pas etre superieur a 4h";
+            if (($request->heure_fin - $request->heure_debut) > 4) {
+                $a = 0;
+                $error = "la duree de sceance ne doit pas etre superieur a 4h";
                 break;
+            } else {
+                $a = 1;
             }
-            else{
-                $a=1;
-            }
-
         }
-        foreach($classes as $classe){
-            if($request->classe_id==$classe->id){
-                foreach($salles as $salle){
-                    if($request->salle_id==$salle->id){
-                        if($classe->nombre>$salle->nombre){
-                            $a=0;
-                            $error="la salle est trop petite pour contenir cette classe";
+        foreach ($classes as $classe) {
+            if ($request->classe_id == $classe->id) {
+                foreach ($salles as $salle) {
+                    if ($request->salle_id == $salle->id) {
+                        if ($classe->nombre > $salle->nombre) {
+                            $a = 0;
+                            $error = "la salle est trop petite pour contenir cette classe";
                             break;
                         }
                     }
@@ -135,32 +124,28 @@ class CreneauController extends Controller
                 break;
             }
         }
-        if($a==1)
-        {
-            $creneaus->jour =$request->jour;
-            $creneaus->heure_debut =$request->heure_debut;
-            $creneaus->heure_fin =$request->heure_fin;
-
-        }
-        else
-        {
-            $matieres=matiere::all();
-            $salles=salle::all();
-            $type_interventions=type_intervention::all();
-            $users=User::all();
-            $classes=classe::all();
-            $creneaus=creneau::all();
-            return view('creneau.new',[
-                'users'=>$users,
-                'classes'=>$classes,
-                'matieres'=>$matieres,
-                'salles'=>$salles,
-                'type_interventions'=>$type_interventions,
-                'creneaus'=>$creneaus,
-                'error'=>$error,
+        if ($a == 1) {
+            $creneaus->jour = $request->jour;
+            $creneaus->heure_debut = $request->heure_debut;
+            $creneaus->heure_fin = $request->heure_fin;
+        } else {
+            $matieres = matiere::all();
+            $salles = salle::all();
+            $type_interventions = type_intervention::all();
+            $users = User::all();
+            $classes = classe::all();
+            $creneaus = creneau::all();
+            return view('creneau.new', [
+                'users' => $users,
+                'classes' => $classes,
+                'matieres' => $matieres,
+                'salles' => $salles,
+                'type_interventions' => $type_interventions,
+                'creneaus' => $creneaus,
+                'error' => $error,
             ]);
         }
-        $creneaus=new creneau($request->all());
+        $creneaus = new creneau($request->all());
         $creneaus->saveOrFail();
         return redirect()->route('creneau.index');
     }
@@ -178,28 +163,27 @@ class CreneauController extends Controller
      */
     public function edit(creneau $creneau)
     {
-        $error="";
-        if(Gate::allows('access-admin')){
-            if(auth()->user()->role !="admin"){
-                abort(403,'vous ne pouvez rien modifier');
+        $error = "";
+        if (Gate::allows('access-admin')) {
+            if (auth()->user()->role != "admin") {
+                abort(403, 'vous ne pouvez rien modifier');
             }
+        } else {
+            abort(403, 'vous ne pouvez rien modifier');
         }
-        else{
-            abort(403,'vous ne pouvez rien modifier');
-        }
-        $matieres=matiere::all();
-        $salles=salle::all();
-        $type_interventions=type_intervention::all();
-        $users=User::all();
-        $classes=classe::all();
-        return view('creneau.edit',[
-            'users'=>$users,
-            'classes'=>$classes,
-            'matieres'=>$matieres,
-            'salles'=>$salles,
-            'type_interventions'=>$type_interventions,
-            'creneau'=>$creneau,
-            'error'=>$error
+        $matieres = matiere::all();
+        $salles = salle::all();
+        $type_interventions = type_intervention::all();
+        $users = User::all();
+        $classes = classe::all();
+        return view('creneau.edit', [
+            'users' => $users,
+            'classes' => $classes,
+            'matieres' => $matieres,
+            'salles' => $salles,
+            'type_interventions' => $type_interventions,
+            'creneau' => $creneau,
+            'error' => $error
         ]);
     }
 
@@ -227,13 +211,12 @@ class CreneauController extends Controller
      */
     public function destroy(creneau $creneau)
     {
-        if(Gate::allows('access-admin')){
-            if(auth()->user()->role!="admin"){
-                abort(403,'vous ne pouvez rien modifier');
+        if (Gate::allows('access-admin')) {
+            if (auth()->user()->role != "admin") {
+                abort(403, 'vous ne pouvez rien modifier');
             }
-        }
-        else{
-            abort(403,'vous ne pouvez rien modifier');
+        } else {
+            abort(403, 'vous ne pouvez rien modifier');
         }
         $creneau->deleteOrFail();
         return redirect()->route('creneau.index');
