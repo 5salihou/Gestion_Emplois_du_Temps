@@ -98,7 +98,6 @@ class CreneauController extends Controller
             }
             if ($request->heure_debut >= $request->heure_fin) {
                 $a = 0;
-
                 $error = "l'heure debut ne peut ni etre superieur ni inferieur a l'heure de fin";
                 break;
             }
