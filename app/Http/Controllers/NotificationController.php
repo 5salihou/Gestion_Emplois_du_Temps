@@ -39,6 +39,7 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+        $a=1;
         $notifications = notification::all();
         // Validation
         $request->validate([

@@ -19,7 +19,7 @@ editer classe
                         @method('put')classe
                         @csrf
                         <div class="row">
-                            <div class="col-12 col-md-6">
+                            <div class="col-3">
                                 <div class="mb-3">
                                     <label for="nom" class="form-label">Nom</label>
                                     <input type="text" value="{{ old('nom') ?? $classe->nom }}" class="form-control"
