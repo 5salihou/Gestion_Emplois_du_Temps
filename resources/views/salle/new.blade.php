@@ -23,7 +23,7 @@ creer salle
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
                                     <input type="number" class="form-control" name="nombre" id="nombre"
-                                        aria-describedby="helpNomId" placeholder="Nom du salle">
+                                        aria-describedby="helpNomId" placeholder="Nombre de place">
                                 </div>
                             </div>
                             <div class="col-12">

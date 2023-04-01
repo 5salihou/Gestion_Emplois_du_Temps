@@ -33,7 +33,7 @@ editer salle
                                     <label for="nombre" class="form-label">Nombre</label>
                                     <input type="number" value="{{ old('nombre') ?? $salle->nombre }}" class="form-control"
                                         name="nombre" id="nom" aria-describedby="helpNomId"
-                                        placeholder="Nom de la tache">
+                                        placeholder="Nombre de place">
                                     @error('nombre')
                                         <small id="helpNomId" class="form-text text-muted">{{ $message }}</small>
                                     @enderror
