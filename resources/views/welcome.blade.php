@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md col-xl-5 d-flex align-items-center">
-                    <a class="navbar-brand align-items-center" href="index.html">
+                    <a class="navbar-brand align-items-center" href="#">
                     GESTION-EDT
                     <span>Pous une bonne Gestion de vos Emplois du temps</span>
                     </a>
